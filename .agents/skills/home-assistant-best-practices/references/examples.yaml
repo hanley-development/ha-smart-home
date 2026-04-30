@@ -1,0 +1,49 @@
+# Example: safe notification-only automation
+
+automation:
+  - alias: Garage door left open notification
+    id: garage_door_left_open_notification
+    mode: restart
+
+    trigger:
+      - platform: state
+        entity_id: cover.garage_door
+        to: open
+        for:
+          minutes: 10
+
+    condition:
+      - condition: template
+        value_template: >
+          {{ states('cover.garage_door') not in ['unknown', 'unavailable'] }}
+
+    action:
+      - service: notify.mobile_app_phone
+        data:
+          title: Garage door open
+          message: The garage door has been open for 10 minutes.
+
+# Example: template binary sensor with safe state handling
+
+template:
+  - binary_sensor:
+      - name: House Occupied
+        unique_id: house_occupied
+        state: >
+          {{
+            is_state('person.michael', 'home')
+            or is_state('person.becky', 'home')
+          }}
+
+# Example: timer helper
+
+timer:
+  garage_door_left_open:
+    duration: "00:10:00"
+
+# Example: input boolean helper
+
+input_boolean:
+  guest_mode:
+    name: Guest Mode
+    icon: mdi:account-group

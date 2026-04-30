@@ -1,0 +1,140 @@
+# ------------------------------------------------------------
+# Codex ignore file
+# Keeps Codex from spending context on generated/noisy/private files.
+# ------------------------------------------------------------
+
+.git/
+
+# ------------------------------------------------------------
+# Git / editor noise
+# ------------------------------------------------------------
+.vscode/
+.vscode-server/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------
+# Home Assistant generated/noisy files
+# ------------------------------------------------------------
+.storage/
+**/.storage/
+.cloud/
+**/.cloud/
+deps/
+**/deps/
+tts/
+**/tts/
+backup/
+backups/
+**/backup/
+**/backups/
+
+home-assistant.log*
+**/home-assistant.log*
+home-assistant_v2.db*
+**/home-assistant_v2.db*
+*.db
+*.db-shm
+*.db-wal
+
+.HA_VERSION
+.uuid
+.google.token
+
+# ------------------------------------------------------------
+# Home Assistant secrets / credentials
+# ------------------------------------------------------------
+secrets.yaml
+**/secrets.yaml
+known_devices.yaml
+**/known_devices.yaml
+
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+*.token
+*token*
+*secret*
+*password*
+*credential*
+*credentials*
+
+# ------------------------------------------------------------
+# ESPHome generated/noisy files
+# ------------------------------------------------------------
+.esphome/
+**/.esphome/
+.pioenvs/
+**/.pioenvs/
+.piolibdeps/
+**/.piolibdeps/
+.platformio/
+**/.platformio/
+build/
+**/build/
+
+# ------------------------------------------------------------
+# Python / tooling noise
+# ------------------------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ------------------------------------------------------------
+# Node / frontend noise
+# ------------------------------------------------------------
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+
+# ------------------------------------------------------------
+# Logs / temp / backups
+# ------------------------------------------------------------
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# ------------------------------------------------------------
+# Media / camera / generated assets
+# ------------------------------------------------------------
+www/snapshots/
+www/camera/
+www/tmp/
+**/snapshots/
+**/camera/
+**/tmp/
+
+# ------------------------------------------------------------
+# Large or generated exports
+# ------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.dump
+*.backup
+*.gz
+
+# ------------------------------------------------------------
+# Notes Metadata
+# ------------------------------------------------------------
+.obsidian/

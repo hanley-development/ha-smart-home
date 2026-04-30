@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "home-assistant-best-practices": {
+      "path": ".agents/skills/home-assistant-best-practices",
+      "enabled": true
+    },
+    "home-assistant-dashboard-designer": {
+      "path": ".agents/skills/home-assistant-dashboard-designer",
+      "enabled": true
+    }
+  }
+}

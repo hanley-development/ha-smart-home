@@ -1,0 +1,219 @@
+{
+  "main": {
+    "id": "97df59e6ee22e62a",
+    "type": "split",
+    "children": [
+      {
+        "id": "fa6a020a9a10a264",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "89a208266668b0f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "custom-card-repos"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b4c8f098398ad0a7",
+    "type": "split",
+    "children": [
+      {
+        "id": "eb46dcf08a9e4942",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4d7223acad5e9348",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "7b98d711628a35e4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "fb4880186c8b01d4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0b2e4d0c1f69422e",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f629827539531d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1dbc39dbeabec956",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for custom-card-repos"
+            }
+          },
+          {
+            "id": "b237f136ea5ba5e1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from README"
+            }
+          },
+          {
+            "id": "a06a5a961eae3aa2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "29d67bd16cdab81e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "5de153baf0ebc67c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian42-brat:BRAT": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "89a208266668b0f1",
+  "lastOpenFiles": [
+    "README.md",
+    ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
+    ".agents/skills/home-assistant-dashboard-designer/SKILL.md",
+    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-safety.md",
+    ".agents/skills/home-assistant-best-practices/references/yaml-only-integrations.md",
+    ".agents/skills/home-assistant-best-practices/references/template-guidelines.md",
+    ".agents/skills/home-assistant-best-practices/references/safe-refactoring.md",
+    ".agents/skills/home-assistant-best-practices/references/helper-selection.md",
+    ".agents/skills/home-assistant-best-practices/references/examples.yaml",
+    ".agents/skills/home-assistant-best-practices/references/dashboard-guide.md",
+    ".agents/skills/home-assistant-best-practices/references/domain-docs.md",
+    ".agents/skills/home-assistant-best-practices/references/dashboard-cards.md",
+    ".agents/skills/home-assistant-best-practices/references/device-control.md",
+    ".agents/skills/home-assistant-best-practices/references/automation-patterns.md",
+    ".agents/skills/home-assistant-best-practices/evals/evals.json",
+    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-layouts.md",
+    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-mcp-workflow.md",
+    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-card-patterns.md",
+    ".obsidian/plugins/table-editor-obsidian/styles.css",
+    ".obsidian/plugins/table-editor-obsidian/manifest.json",
+    ".obsidian/plugins/table-editor-obsidian/data.json",
+    ".obsidian/plugins/table-editor-obsidian/main.js",
+    ".obsidian/plugins/show-hidden-files/manifest.json",
+    ".obsidian/plugins/show-hidden-files/styles.css",
+    ".obsidian/plugins/obsidian-git/styles.css",
+    ".obsidian/plugins/obsidian-git/manifest.json",
+    ".agents/skills/home-assistant-best-practices/SKILL.md"
+  ]
+}
