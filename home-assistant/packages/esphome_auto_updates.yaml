@@ -1,0 +1,50 @@
+# ESPHome auto-update package
+# Applies only to explicitly approved ESPHome device firmware update entities.
+# It does not include the separate ESPHome builder/add-on update entity.
+
+input_boolean:
+  esphome_auto_updates_enabled:
+    name: ESPHome Auto Updates Enabled
+    icon: mdi:update-auto
+    initial: false
+
+automation:
+  - alias: ESPHome Auto Updates
+    id: esphome_auto_updates
+    description: >
+      Installs pending updates for approved ESPHome update entities during
+      the overnight maintenance window.
+    mode: single
+    trigger:
+      - platform: time
+        at: "03:00:00"
+    variables:
+      esphome_update_entities:
+        - update.basement_bluetooth_proxy_firmware
+        - update.garage_bluetooth_proxy_firmware
+        - update.living_room_bluetooth_proxy_firmware
+        - update.ratgdov2_5i_11d5dc_firmware
+        - update.ratgdov2_5i_0cd4e2_firmware
+      pending_esphome_updates: >-
+        {% set pending = namespace(items=[]) %}
+        {% for entity_id in esphome_update_entities %}
+          {% if states(entity_id) == 'on' %}
+            {% set pending.items = pending.items + [entity_id] %}
+          {% endif %}
+        {% endfor %}
+        {{ pending.items }}
+    condition:
+      - condition: state
+        entity_id: input_boolean.esphome_auto_updates_enabled
+        state: "on"
+      - condition: template
+        value_template: "{{ pending_esphome_updates | count > 0 }}"
+    action:
+      - repeat:
+          for_each: "{{ pending_esphome_updates }}"
+          sequence:
+            - service: update.install
+              target:
+                entity_id: "{{ repeat.item }}"
+              data:
+                backup: false

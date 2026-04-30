@@ -1,6 +1,7 @@
 # MCP Safety Guide
 
 ## Purpose
+Read-only MCP actions are allowed. Write/control actions require explicit approval.
 
 This project uses the Home Assistant MCP server for live discovery and controlled interaction with Home Assistant.
 

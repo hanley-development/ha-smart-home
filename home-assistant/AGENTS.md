@@ -2,57 +2,122 @@
 
 ## Scope
 
-This directory contains Home Assistant source-controlled configuration.
+This directory contains documentation, exports, snapshots, and optional source-controlled YAML for Home Assistant.
 
-This may include:
+Home Assistant itself is the source of truth for most UI-managed objects.
 
+Prefer MCP for creating and modifying:
+
+- helpers
 - automations
-- scripts
+- dashboards
+- areas
+- labels
 - scenes
-- packages
-- templates
-- groups
-- helpers represented in YAML
-- notification logic
+- scripts, when UI-managed
 
-This project does not use YAML-managed dashboards.
+Do not assume new Home Assistant objects must be created as YAML packages.
 
-## Dashboard rule
+## Preferred operating model
+
+Use MCP-first object management.
+
+For new helpers and automations:
+
+1. Use MCP to inspect existing entities, helpers, automations, areas, labels, and services.
+2. Propose the helper or automation design.
+3. Ask for explicit approval before creating or modifying anything.
+4. Use MCP to create or modify the approved Home Assistant object.
+5. Verify the object exists through MCP.
+6. Export or document the resulting YAML/config snapshot in this repo.
+
+## Repo storage model
+
+Use this repo to store:
+
+- proposed automation YAML
+- exported automation YAML
+- helper design notes
+- helper export snapshots
+- dashboard plans
+- dashboard card plans
+- MCP change logs
+- package YAML only when source-controlled YAML is intentionally needed
+
+Do not use this repo as the primary source of truth for UI-managed Home Assistant objects unless explicitly stated.
+
+## Automations
+
+Automations are normally created and managed through Home Assistant/MCP.
+
+Store automation snapshots under:
+
+```text
+home-assistant/automations/exports/
+```
+
+Automation export files are for review, documentation, and rollback reference unless the user explicitly says they are source-controlled live config.
+
+## Helpers
+
+Helpers are normally created and managed through Home Assistant/MCP.
+
+Store helper snapshots or notes under:
+
+```text
+home-assistant/helpers/exports/
+```
+
+Do not create helper YAML packages unless explicitly asked.
+
+## Packages
+
+Packages are optional.
+
+Use packages only when a feature truly benefits from being source-controlled as YAML.
+
+Good package use cases:
+
+- complex YAML-only integrations
+- bundled feature logic that should be version-controlled
+- reusable feature systems with helpers, templates, scripts, and automations together
+- configurations that are easier to review as code than through the UI
+- legacy YAML packages already in use
+
+Do not create new packages by default.
+
+Ask first before converting UI-managed automations or helpers into packages.
+
+## Dashboards
 
 Dashboards are UI-managed.
 
 Do not:
 
 - create YAML dashboard files
-- edit YAML dashboard files
 - edit `.storage`
 - convert UI dashboards to YAML
 
-Use MCP or the Home Assistant UI for dashboard inspection and changes.
+Use MCP/UI-supported dashboard tools.
 
-## File handling
+Store dashboard plans under:
 
-- Prefer editing YAML files directly.
-- Do not hand-edit `.storage`.
-- Do not modify generated files, logs, databases, backups, or dependency folders.
-- Preserve comments and formatting.
-- Keep related logic together when reasonable.
-- Prefer packages for grouped feature logic.
-
-## Entity rules
-
-- Do not invent entity IDs.
-- Use MCP to discover real entities.
-- Prefer stable entity IDs over friendly names.
-- Do not rename entities unless explicitly asked.
-- If an entity is unknown, mark it as TODO instead of guessing.
-
-Example:
-
-```yaml
-# TODO: Replace with real entity discovered from MCP.
-entity_id: binary_sensor.todo_replace_me
+```text
+home-assistant/dashboards/plans/
 ```
+This project does not use YAML-managed dashboards.
+
+## Safety
+
+Creating, modifying, enabling, disabling, deleting, or triggering automations through MCP requires explicit approval.
+
+Creating or modifying helpers through MCP requires approval.
+
+Automations that control safety-sensitive devices require extra confirmation.
+
+Safety-sensitive devices include locks, garage doors, alarm systems, HVAC, cameras, water valves, sirens, and security devices.
+
+Notification-only automations are lower risk, but still require approval before creation.
 
 ## Automation rules
 
@@ -89,6 +154,12 @@ Notification-only automations are preferred first.
 
 ## Validation
 
-Prefer Home Assistant config validation before reload.
+After MCP creates or modifies an object:
 
-Do not reload or restart Home Assistant unless explicitly asked.
+- verify it exists
+- verify key entities are correct
+- verify it is enabled/disabled as expected
+- export or document the final configuration when possible
+
+Prefer Home Assistant config validation before reload.
+Do not reload or restart Home Assistant unless explicitly approved.
