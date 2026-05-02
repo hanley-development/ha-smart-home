@@ -21,7 +21,7 @@ Core goals:
 - Dashboards are UI-managed.
 - Do not edit `.storage`.
 - Do not create YAML dashboards unless explicitly instructed.
-- Use MCP for live entity/device/area/label/state discovery.
+- Use ha-mcp for live entity/device/area/label/state discovery.
 - Do not use repo-wide scans just to discover live Home Assistant state.
 - Do not perform live control actions without explicit user approval.
 - Prefer small, targeted diffs.
@@ -37,4 +37,4 @@ To reduce Codex usage:
 - Avoid Home Assistant database/log/cache files.
 - Avoid ESPHome build artifacts.
 - Avoid broad Git operations.
-- Prefer MCP discovery over repo search.
+- Prefer ha-mcp discovery over repo search.

@@ -188,6 +188,12 @@
   },
   "active": "89a208266668b0f1",
   "lastOpenFiles": [
+    "tools/validate_ha_yaml.py",
+    "tools/ha_workspace_audit.py",
+    "tools/build_export_index.py",
+    "tools/Test-HaWorkspace.ps1",
+    "tools/New-HaWorkspaceFolders.ps1",
+    "tools",
     "docs/starter-prompts.md",
     "docs/ha-mcp-connection.md",
     "docs/codex-workflows.md",
@@ -217,12 +223,6 @@
     "agents/.codex/prompts/07-custom-card-visuals.md",
     "agents/.codex/prompts/06-script-build.md",
     "agents/.codex/prompts/05-automation-build.md",
-    "agents/.codex/prompts/04-helper-design.md",
-    "agents/.codex/prompts",
-    "agents/.codex/agents",
-    "agents/.codex/config.toml.example",
-    "agents/.codex",
-    "agents",
-    "prompts"
+    "agents/.codex/prompts"
   ]
 }

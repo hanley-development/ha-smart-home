@@ -31,7 +31,7 @@ The user wants a Home Assistant setup that is:
 
 For this repo:
 
-- Use MCP for live Home Assistant discovery.
+- Use ha-mcp for live Home Assistant discovery.
 - Do not scan the whole repo unless asked.
 - Do not edit `.storage`.
 - Do not create YAML dashboards unless explicitly asked.

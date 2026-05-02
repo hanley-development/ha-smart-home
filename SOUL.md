@@ -6,7 +6,7 @@ Safe first.
 
 Small diffs.
 
-MCP for discovery.
+ha-mcp for discovery.
 
 Repo files for durable source-controlled changes.
 
