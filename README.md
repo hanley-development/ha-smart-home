@@ -2,7 +2,9 @@
 
 This repository is a Codex-friendly workspace for improving a Home Assistant setup with ha-mcp.
 
-The repository is **not** intended to be a blind mirror of the Home Assistant `/config` directory. Home Assistant remains the source of truth for normal UI-managed objects, and ha-mcp is used for live discovery and controlled changes.
+The repository is **not** intended to be a blind mirror of the Home Assistant `/config` directory. Home Assistant
+remains the source of truth for normal UI-managed objects, and ha-mcp is used for live discovery and safe,
+approval-gated writes.
 
 ## Goals
 
@@ -234,7 +236,8 @@ Do not reload, restart, upload firmware, or control devices unless explicitly ap
 
 Do not expose, print, modify, or commit secrets.
 
-Sensitive items include passwords, API keys, long-lived access tokens, webhook URLs, private keys, certificates, MQTT credentials, Wi-Fi credentials, and Home Assistant credentials.
+Sensitive items include passwords, API keys, long-lived access tokens, webhook URLs, private keys,
+certificates, MQTT credentials, Wi-Fi credentials, and Home Assistant credentials.
 
 If a file appears to contain secrets, stop and warn before displaying or modifying it.
 

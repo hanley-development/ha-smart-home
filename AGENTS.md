@@ -4,7 +4,9 @@
 
 This repository supports a Home Assistant + ha-mcp smart home project.
 
-The goal is to improve Home Assistant automations, helpers, scripts, templates, optional packages, ESPHome devices, entity organization, areas, labels, dashboards, and MCP-assisted workflows while prioritizing safety and approval workflows.
+The goal is to improve Home Assistant automations, helpers, scripts, templates, optional packages, ESPHome devices,
+entity organization, areas, labels, dashboards, and MCP-assisted workflows while maintaining safe, explicit approval
+for all write/control operations.
 
 This project uses Home Assistant MCP / ha-mcp for live Home Assistant discovery and, after explicit approval, for creating or modifying Home Assistant objects.
 
