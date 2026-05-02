@@ -1,0 +1,35 @@
+# Codex MCP configuration reference for this repo.
+#
+# Keep the real config in your user-level Codex config, normally:
+#   ~/.codex/config.toml
+#
+# Do not commit real private URLs, tokens, webhook URLs, or credentials.
+# Keep only one Home Assistant server configuration active in your real config.
+
+# -----------------------------------------------------------------------------
+# Option A: Home Assistant OS ha-mcp add-on / remote MCP URL
+# -----------------------------------------------------------------------------
+# Use this style only if your Codex version supports HTTP MCP server entries.
+# Paste the MCP URL shown by the ha-mcp add-on logs into your real Codex config.
+#
+# [mcp_servers.home-assistant]
+# url = "REPLACE_ME_HA_MCP_ADDON_OR_WEBHOOK_URL"
+
+# -----------------------------------------------------------------------------
+# Option B: Local stdio ha-mcp process on the Codex workstation
+# -----------------------------------------------------------------------------
+# This runs ha-mcp from the workstation where Codex runs.
+# Add Home Assistant connection details in your real user-level config or another
+# local secret mechanism. Do not store credentials in this repo.
+#
+# [mcp_servers.home-assistant]
+# command = "uvx"
+# args = ["ha-mcp@latest"]
+
+# -----------------------------------------------------------------------------
+# Repo guidance
+# -----------------------------------------------------------------------------
+# AGENTS.md is the source of truth for repo behavior.
+# .codexignore keeps Codex away from noisy/generated/sensitive files.
+# .codex/prompts contains task starters.
+# .codex/agents contains reusable subagent-style role prompts.
