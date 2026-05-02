@@ -8,6 +8,12 @@
 Thumbs.db
 
 # ------------------------------------------------------------
+# Personal notes / editor metadata
+# ------------------------------------------------------------
+.obsidian/
+**/.obsidian/
+
+# ------------------------------------------------------------
 # Home Assistant generated/noisy files
 # ------------------------------------------------------------
 .storage/
@@ -47,8 +53,8 @@ known_devices.yaml
 *.pem
 *.p12
 *.pfx
-*.crt
 *.csr
+*.crt
 *.token
 *token*
 *secret*
