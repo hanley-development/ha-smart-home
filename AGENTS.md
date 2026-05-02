@@ -467,6 +467,16 @@ esphome upload path/to/device.yaml
 
 Do not commit unless explicitly asked.
 
+For non-trivial repo changes, use a branch-first workflow:
+
+1. Create a short-lived branch from `main`.
+2. Make focused changes on that branch.
+3. Run repo-local checks such as `python tools/run_codex_checks.py`, Ruff, yamllint, and markdownlint when relevant.
+4. Summarize the diff and validation results for review.
+5. Open a pull request or ask for explicit approval before merging to `main`.
+
+Direct commits to `main` are acceptable only for small requested documentation/rules updates or when the user explicitly asks to commit directly to `main`.
+
 Do not run the following unless explicitly asked:
 
 - `git pull`
@@ -492,6 +502,7 @@ Preferred checks:
 - ESPHome YAML: run `esphome config <file>` before suggesting compile/upload.
 - Python files: run targeted tests or syntax checks.
 - Markdown/rules files: check for clarity and consistency.
+- Repo hygiene/lint checks: run `python tools/run_codex_checks.py` and relevant linters before PRs.
 
 Do not run long deployment, compile, upload, reload, restart, or live-service commands unless explicitly asked.
 
