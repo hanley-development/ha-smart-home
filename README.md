@@ -2,7 +2,7 @@
 
 This repository is a Codex-friendly workspace for improving a Home Assistant setup with ha-mcp.
 
-The repository is **not** intended to be a blind mirror of the Home Assistant `/config` directory. Home Assistant remains the source of truth for normal UI-managed objects, and ha-mcp is used for live discovery and approved changes.
+The repository is **not** intended to be a blind mirror of the Home Assistant `/config` directory. Home Assistant remains the source of truth for normal UI-managed objects, and ha-mcp is used for live discovery and controlled changes.
 
 ## Goals
 
@@ -124,7 +124,7 @@ ha-mcp-workflow-tools
 Use them this way:
 
 | Task | Skill |
-|---|---|
+| --- | --- |
 | Automation, helper, template, package, ESPHome review | `home-assistant-best-practices` |
 | Dashboard layout, custom cards, Lovelace safety | `home-assistant-dashboard-designer` |
 | Safe ha-mcp tool selection and workflow | `ha-mcp-workflow-tools` |
@@ -142,7 +142,7 @@ There are three distinct action paths:
 Preferred ha-mcp tool families:
 
 | Need | Preferred tool family |
-|---|---|
+| --- | --- |
 | Find entities/devices/states | `ha_search_entities`, `ha_get_state`, `ha_get_entity`, `ha_get_device`, `ha_get_overview` |
 | Helpers | `ha_config_list_helpers`, `ha_get_helper_schema`, `ha_config_set_helper` |
 | Automations | `ha_config_get_automation`, `ha_config_set_automation`, `ha_get_automation_traces` |

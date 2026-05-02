@@ -52,6 +52,7 @@ condition:
     value_template: >
       {{ states('sensor.example') not in ['unknown', 'unavailable', 'none'] }}
 ```
+
 Use MCP for discovery. Create automations through MCP after approval. Store exports under `home-assistant/automations/exports/`.
 
 ## Avoid dangerous automatic actions

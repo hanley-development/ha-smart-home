@@ -21,7 +21,7 @@ On Windows PowerShell:
 ## Scripts
 
 | Script | Purpose |
-|---|---|
+| --- | --- |
 | `ha_workspace_audit.py` | Checks required repo files, skill paths, ignore patterns, and recommended folders. |
 | `validate_ha_yaml.py` | Validates YAML syntax for source-controlled Home Assistant, ESPHome, and skill artifacts. Requires PyYAML. |
 | `build_export_index.py` | Rebuilds `home-assistant/EXPORT_INDEX.md` from repo export folders and dashboard plans. |
