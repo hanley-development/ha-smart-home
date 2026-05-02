@@ -53,7 +53,13 @@ condition:
       {{ states('sensor.example') not in ['unknown', 'unavailable', 'none'] }}
 ```
 
-Use MCP for discovery. Create automations through MCP after approval. Store exports under `home-assistant/automations/exports/`.
+Use MCP for discovery. Create automations through MCP after approval.
+
+Store exports under:
+
+```text
+home-assistant/automations/exports/
+```
 
 ## Avoid dangerous automatic actions
 
