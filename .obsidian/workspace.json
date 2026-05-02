@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
+                "file": "README.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "custom-card-repos"
+              "title": "README"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for custom-card-repos"
+              "title": "Backlinks for README"
             }
           },
           {
@@ -188,38 +188,41 @@
   },
   "active": "89a208266668b0f1",
   "lastOpenFiles": [
-    "home-assistant/templates/exports",
-    "home-assistant/packages/exports",
-    "home-assistant/packages/README.md",
-    "home-assistant/scenes/exports/.gitkeep",
-    "home-assistant/scenes/exports",
-    "home-assistant/scripts/README.md",
-    "home-assistant/scripts/exports/.gitkeep",
-    "home-assistant/scripts/exports",
-    "home-assistant/helpers/exports/.gitkeep",
-    "home-assistant/helpers/exports",
-    "home-assistant/helpers/README.md",
-    "home-assistant/helpers",
-    "home-assistant/dashboards/plans/.gitkeep",
-    "home-assistant/dashboards/plans",
-    "home-assistant/automations/README.md",
-    "docs/README.md",
-    "README.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/fallback.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/onboarding.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/organize.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/history.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/dashboard.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/service-call.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/review.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/read.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/write.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/helper.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/entity-discovery.md",
+    ".agents/skills/ha-mcp-workflow-tools/references/core.md",
+    ".agents/skills/ha-mcp-workflow-tools/references",
+    ".agents/skills/ha-mcp-workflow-tools/SKILL.md",
+    ".agents/skills/ha-mcp-workflow-tools",
     ".agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md",
-    ".agents/skills/home-assistant-dashboard-designer/SKILL.md",
-    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-safety.md",
-    ".agents/skills/home-assistant-best-practices/references/yaml-only-integrations.md",
-    ".agents/skills/home-assistant-best-practices/references/template-guidelines.md",
-    ".agents/skills/home-assistant-best-practices/references/safe-refactoring.md",
-    ".agents/skills/home-assistant-best-practices/references/helper-selection.md",
-    ".agents/skills/home-assistant-best-practices/references/dashboard-guide.md",
-    ".agents/skills/home-assistant-best-practices/references/domain-docs.md",
-    ".agents/skills/home-assistant-best-practices/references/dashboard-cards.md",
-    ".agents/skills/home-assistant-best-practices/references/device-control.md",
-    ".agents/skills/home-assistant-best-practices/references/automation-patterns.md",
-    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-layouts.md",
-    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-mcp-workflow.md",
-    ".agents/skills/home-assistant-dashboard-designer/references/dashboard-card-patterns.md",
-    ".agents/skills/home-assistant-best-practices/SKILL.md"
+    ".agents/skills/ha-mcp/review/SKILL.md",
+    ".agents/skills/ha-mcp/review",
+    ".agents/skills/ha-mcp/read/SKILL.md",
+    ".agents/skills/ha-mcp/read",
+    ".agents/skills/ha-mcp/organize/SKILL.md",
+    ".agents/skills/ha-mcp/organize",
+    ".agents/skills/ha-mcp/onboarding/SKILL.md",
+    ".agents/skills/ha-mcp/onboarding",
+    ".agents/skills/ha-mcp/history/SKILL.md",
+    ".agents/skills/ha-mcp/history",
+    ".agents/skills/ha-mcp/helper/references/helper-selection.md",
+    ".agents/skills/ha-mcp/helper/SKILL.md",
+    ".agents/skills/ha-mcp/helper/references",
+    ".agents/skills/ha-mcp/helper",
+    ".agents/skills/ha-mcp/ha-mcp/SKILL.md",
+    ".agents/skills/ha-mcp/ha-mcp",
+    ".agents/skills/ha-mcp/fallback/SKILL.md",
+    ".agents/skills/ha-mcp/entity-discovery/SKILL.md",
+    ".agents/skills/ha-mcp/dashboard/references/custom-card-policy.md",
+    ".agents/skills/ha-mcp/dashboard/SKILL.md"
   ]
 }

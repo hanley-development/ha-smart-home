@@ -1,0 +1,7 @@
+name: ESPHome Auto Updates Pending
+entity_id: binary_sensor.esphome_auto_updates_pending
+platform: template
+device_class: update
+state: >-
+  {{ ((label_entities('esphome_auto_update') | select('match', '^update\\.')
+  | select('is_state', 'on') | list) | count) > 0 }}

@@ -1,0 +1,53 @@
+# Dashboard Workflow
+
+## Scope
+
+Use for UI-managed dashboards through MCP.
+
+Do not edit `.storage`.
+
+Do not create YAML dashboard source files unless explicitly requested.
+
+## Preferred tools
+
+Use:
+
+- `ha_config_get_dashboard`
+- `ha_config_set_dashboard`
+- `ha_config_delete_dashboard`
+- `ha_config_list_dashboard_resources`
+- `ha_config_set_dashboard_resource`
+- `ha_config_delete_dashboard_resource`
+- `ha_hacs_search`
+- `ha_hacs_repository_info`
+- `ha_hacs_download`
+
+## Dashboard workflow
+
+1. Inspect dashboards/resources through MCP.
+2. Confirm custom cards/resources are installed before using them.
+3. Read the existing dashboard before content changes.
+4. Propose a targeted plan.
+5. Identify safety-sensitive controls.
+6. Ask for approval before applying changes.
+7. Apply through `ha_config_set_dashboard` or resource tools.
+8. Read back and verify the change.
+9. Store a dashboard plan/snapshot under `home-assistant/dashboards/plans/` when useful.
+
+## Custom card rules
+
+- Prefer built-in Home Assistant cards when they solve the problem cleanly.
+- Use custom cards only when they provide clear value.
+- Confirm installation via dashboard resources/HACS before using a custom card.
+- Do not invent custom-card schema.
+- Do not use stale/unmaintained custom cards for critical controls unless approved.
+
+## Safety-sensitive cards
+
+For locks, garage doors, alarms, HVAC, cameras, sirens, valves, and security controls:
+
+- show status before controls
+- keep controls visually separated
+- avoid hidden tap actions
+- use confirmation where possible
+- do not bury controls inside unclear popups

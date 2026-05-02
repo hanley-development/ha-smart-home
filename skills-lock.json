@@ -8,6 +8,10 @@
     "home-assistant-dashboard-designer": {
       "path": ".agents/skills/home-assistant-dashboard-designer",
       "enabled": true
+    },
+    "ha-mcp-workflow-tools": {
+      "path": ".agents/skills/ha-mcp-workflow-tools",
+      "enabled": true
     }
   }
 }

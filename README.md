@@ -28,7 +28,7 @@ This workspace is used to improve:
 - automations
 - scripts
 - templates
-- packages
+- optional packages
 - ESPHome device configuration
 - dashboard design
 - custom card usage
@@ -63,6 +63,43 @@ Current naming issues:
 
 ---
 
+## Operating Model
+
+Home Assistant is the source of truth for normal UI-managed objects.
+
+Use MCP to discover and, after approval, create or modify:
+
+- helpers
+- automations
+- dashboards
+- areas
+- labels
+- scenes
+- UI-managed scripts
+
+Use this repo to store:
+
+- agent rules
+- skills
+- documentation
+- proposed changes
+- exports/snapshots
+- rollback references
+- dashboard plans
+- optional source-controlled YAML packages
+
+Do not create packages by default.
+
+Packages are only used when:
+
+- explicitly requested
+- a YAML-only integration requires them
+- an existing package is being updated
+- a feature is better maintained as source-controlled YAML
+- multiple related YAML domains intentionally need to live together
+
+---
+
 ## Agent and Codex Structure
 
 This repo includes agent instructions and skills so Codex can work safely and consistently.
@@ -81,17 +118,18 @@ The root `AGENTS.md` defines the main operating model:
 
 1. Use MCP for live Home Assistant discovery.
 2. Avoid repo-wide scans unless explicitly requested.
-3. Edit only named files unless a referenced include/package must also be read.
-4. Do not invent entity IDs.
-5. Do not hand-edit `.storage`.
-6. Do not control live devices without explicit approval.
-7. Validate changes when possible.
+3. Do not invent entity IDs.
+4. Do not hand-edit `.storage`.
+5. Do not control live devices without explicit approval.
+6. Prefer MCP for UI-managed Home Assistant objects.
+7. Store exports/snapshots/plans in the repo when useful.
+8. Validate changes when possible.
 
 ---
 
 ## MCP-First Workflow
 
-This project is designed to use the Home Assistant MCP server for discovery.
+This project is designed to use the Home Assistant MCP server for discovery and approved Home Assistant object changes.
 
 MCP should be used for:
 
@@ -101,6 +139,7 @@ MCP should be used for:
 - label lookup
 - state inspection
 - automation inspection
+- helper inspection
 - script inspection
 - scene inspection
 - dashboard inspection, if available
@@ -115,23 +154,36 @@ Preferred workflow:
 MCP discovers live Home Assistant state
 → agent proposes a safe change
 → user approves if needed
-→ Codex edits only the needed files or MCP applies approved UI changes
+→ MCP applies approved Home Assistant object changes
+→ MCP verifies the result
+→ repo stores exports/snapshots/plans when useful
+```
+
+For source-controlled YAML or docs:
+
+```text
+MCP discovers live Home Assistant state
+→ agent drafts the change
+→ user approves
+→ Codex edits only the needed repo files
 → change is validated
 ```
 
 Read-only MCP actions are allowed.
 
-Live control actions require explicit approval.
+Live control or write actions require explicit approval.
 
-Examples of live control actions:
+Examples of live/write actions:
 
 - turning devices on/off
 - opening or closing garage doors
 - locking or unlocking doors
 - arming or disarming alarms
 - changing HVAC modes or setpoints
-- enabling/disabling automations
+- creating/modifying/enabling/disabling automations
+- creating/modifying helpers
 - modifying dashboards
+- changing labels/areas/entities
 - reloading or restarting Home Assistant
 
 ---
@@ -149,7 +201,8 @@ Current skills:
 ```text
 .agents/skills/
 ├─ home-assistant-best-practices/
-└─ home-assistant-dashboard-designer/
+├─ home-assistant-dashboard-designer/
+└─ ha-mcp-workflow-tools/
 ```
 
 ### Home Assistant Best Practices Skill
@@ -160,25 +213,24 @@ Path:
 .agents/skills/home-assistant-best-practices/
 ```
 
+Used for Home Assistant design and implementation patterns.
+
+This skill answers:
+
+```text
+What is the right Home Assistant pattern?
+```
+
 Used for:
 
-- Home Assistant YAML review
-- automations
-- scripts
+- automation design
+- helper selection
 - templates
-- helpers
-- packages
+- scripts
+- optional packages
 - entity organization
 - safe refactoring
 - ESPHome review
-- MCP-safe workflows
-
-Important references include:
-
-- automation patterns
-- helper selection
-- template guidelines
-- safe refactoring
 - device-control safety
 - YAML-only integration guidance
 
@@ -190,15 +242,7 @@ Path:
 .agents/skills/home-assistant-dashboard-designer/
 ```
 
-Used for:
-
-- dashboard design
-- dashboard review
-- dashboard card planning
-- custom card selection
-- mobile dashboard layouts
-- dashboard safety
-- MCP-based dashboard creation/modification
+Used for dashboard design, layout, cards, custom cards, and dashboard safety.
 
 Important rule:
 
@@ -209,6 +253,91 @@ Dashboard changes should be made through:
 - Home Assistant UI
 - MCP-supported dashboard tools
 - user-approved MCP dashboard modification actions
+
+### ha-mcp Workflow Tools Skill
+
+Path:
+
+```text
+.agents/skills/ha-mcp-workflow-tools/
+```
+
+Used for safe Home Assistant MCP operations.
+
+This skill answers:
+
+```text
+How should the agent safely use ha-mcp tools?
+```
+
+It adapts ha-nova-style workflow categories to the `homeassistant-ai/ha-mcp` tool model.
+
+It includes reference workflows for:
+
+- core MCP rules
+- entity discovery
+- helper creation
+- read-only inspection
+- writing approved Home Assistant objects
+- reviews/debugging
+- service calls
+- dashboards
+- history/traces/logs
+- organization
+- onboarding
+- fallback/error handling
+
+Core behavior:
+
+- MCP-first discovery.
+- Explicit approval before writes/control.
+- Home Assistant remains source of truth for UI-managed helpers, automations, dashboards, areas, labels, scenes, and scripts.
+- Repo stores exports/snapshots/plans.
+- YAML packages are optional and not created by default.
+- Dashboard changes use ha-mcp dashboard tools, not `.storage` edits.
+
+---
+
+## Home Assistant Repo Storage
+
+This repo may contain Home Assistant exports, snapshots, plans, and optional YAML.
+
+Recommended structure:
+
+```text
+home-assistant/
+├─ AGENTS.md
+├─ automations/
+│  └─ exports/
+├─ helpers/
+│  └─ exports/
+├─ packages/
+├─ scripts/
+│  └─ exports/
+└─ dashboards/
+   └─ plans/
+```
+
+Files under these folders are not automatically live-loaded by Home Assistant unless explicitly documented.
+
+Use these folders as follows:
+
+- `home-assistant/automations/exports/` — automation exports, proposed YAML, snapshots, rollback references
+- `home-assistant/helpers/exports/` — helper exports, helper design notes, rollback references
+- `home-assistant/scripts/exports/` — script exports and snapshots
+- `home-assistant/dashboards/plans/` — dashboard plans, card plans, layout notes
+- `home-assistant/packages/` — optional source-controlled YAML packages only when needed
+
+Do not commit:
+
+- `.storage`
+- database files
+- logs
+- backups
+- dependency folders
+- secrets
+- tokens
+- generated ESPHome build output
 
 ---
 
@@ -259,6 +388,7 @@ Custom card guidance is stored in:
 
 ```text
 .agents/skills/home-assistant-dashboard-designer/references/custom-cards.md
+.agents/skills/home-assistant-dashboard-designer/references/custom-card-repos.md
 ```
 
 Custom cards should be treated as an allowlist and design reference, not as guaranteed installed dependencies.
@@ -314,7 +444,7 @@ They should not be chosen only because they are popular.
 
 ## Helpers
 
-Helpers should be used to make automations configurable, reusable, and easier to maintain.
+Helpers should normally be created and managed through MCP/Home Assistant UI.
 
 Common helper types:
 
@@ -347,9 +477,17 @@ Use helpers when:
 
 Do not invent helper entity IDs. Use MCP to discover existing helpers first.
 
+After creating or modifying helpers through MCP, store snapshots/exports in:
+
+```text
+home-assistant/helpers/exports/
+```
+
 ---
 
 ## Automations
+
+Automations should normally be created and managed through MCP/Home Assistant UI.
 
 Automations should be:
 
@@ -385,6 +523,57 @@ Safety-sensitive areas include:
 
 Notification-only automations are preferred before automatic control.
 
+After creating or modifying automations through MCP, store snapshots/exports in:
+
+```text
+home-assistant/automations/exports/
+```
+
+---
+
+## Packages
+
+Packages are optional.
+
+Do not create packages by default.
+
+Use packages only when:
+
+- explicitly requested
+- a YAML-only integration requires them
+- an existing package is being updated
+- a feature is better maintained as source-controlled YAML
+- multiple related YAML domains intentionally need to live together
+
+A package may include:
+
+- automation
+- script
+- template
+- sensor
+- binary_sensor
+- input_boolean
+- input_number
+- input_select
+- input_datetime
+- timer
+- counter
+- variable
+- group
+
+Packages should represent one clear feature or system.
+
+Examples:
+
+```text
+nws_alerts.yaml
+esphome_auto_updates.yaml
+battery_monitoring.yaml
+network_monitoring.yaml
+```
+
+Do not use packages as random dumping grounds.
+
 ---
 
 ## Templates
@@ -410,6 +599,8 @@ Prefer safe state checks:
 ```
 
 Templates should be readable and maintainable. Avoid deeply nested templates unless necessary.
+
+Prefer native Home Assistant triggers, conditions, and helpers before creating complex templates.
 
 ---
 
@@ -450,35 +641,6 @@ esphome config path/to/device.yaml
 ```
 
 Do not compile or upload firmware unless explicitly approved.
-
----
-
-## Home Assistant Source-Controlled Config
-
-Source-controlled Home Assistant config may include:
-
-```text
-home-assistant/
-├─ AGENTS.md
-├─ automations/
-├─ packages/
-├─ scripts/
-├─ scenes/
-└─ templates/
-```
-
-This repo should not track Home Assistant generated files.
-
-Do not commit:
-
-- `.storage`
-- database files
-- logs
-- backups
-- dependency folders
-- secrets
-- tokens
-- generated ESPHome build output
 
 ---
 
@@ -531,26 +693,23 @@ Use MCP for discovery.
 
 Do not scan the whole repo.
 
-Read only:
-- AGENTS.md
-- home-assistant/AGENTS.md
-- the specific file I name
-
 Task:
-Update the garage notification automation.
+Create a helper and automation for dryer notifications.
 
-Constraints:
-- Do not invent entity IDs.
-- Do not control the garage door.
-- Do not edit `.storage`.
-- Validate YAML if possible.
-- Summarize changed files and risks.
+Rules:
+- Do not create a package unless I explicitly approve it.
+- Use MCP to inspect existing dryer entities, notification services, helpers, and related automations.
+- Propose the helper and automation first.
+- After I approve, create them through MCP.
+- Then export or document the final automation/helper YAML into:
+  - home-assistant/automations/exports/dryer_notification.yaml
+  - home-assistant/helpers/exports/laundry_helpers.yaml
 ```
 
 For dashboard work:
 
 ```text
-Use the Home Assistant dashboard designer skill.
+Use the Home Assistant dashboard designer skill and ha-mcp-workflow-tools skill.
 
 Use MCP to inspect the existing dashboard.
 
@@ -577,6 +736,7 @@ safe dashboards
 maintainable automations
 real entity IDs
 explicit approval for live control
+exports/snapshots for review and rollback
 ```
 
 Avoid:
@@ -589,4 +749,5 @@ fragile dashboard hacks
 unsafe live control
 broad refactors
 unapproved restarts/reloads
+unnecessary packages
 ```

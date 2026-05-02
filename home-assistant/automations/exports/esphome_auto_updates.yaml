@@ -1,0 +1,28 @@
+id: "1777587647572"
+alias: ESPHome Auto Updates
+description: >-
+  Auto-install approved ESPHome device firmware updates for labeled update
+  entities during the overnight maintenance window.
+initial_state: false
+mode: single
+variables:
+  labeled_update_entities: >-
+    {{ label_entities('esphome_auto_update') | select('match', '^update\\.')
+    | list }}
+  pending_esphome_updates: >-
+    {{ label_entities('esphome_auto_update') | select('match', '^update\\.')
+    | select('is_state', 'on') | list }}
+trigger:
+  - platform: time
+    at: "03:00:00"
+condition:
+  - condition: state
+    entity_id: binary_sensor.esphome_auto_updates_pending
+    state: "on"
+action:
+  - repeat:
+      for_each: "{{ pending_esphome_updates }}"
+      sequence:
+        - action: update.install
+          target:
+            entity_id: "{{ repeat.item }}"
