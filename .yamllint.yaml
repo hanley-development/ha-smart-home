@@ -1,0 +1,32 @@
+---
+extends: default
+
+ignore: |
+  .git/
+  .storage/
+  **/.storage/
+  .esphome/
+  **/.esphome/
+  node_modules/
+  **/node_modules/
+  .venv/
+  venv/
+
+rules:
+  document-start: disable
+  line-length:
+    max: 160
+    level: warning
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']
+    check-keys: false
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1
