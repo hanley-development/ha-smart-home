@@ -6,7 +6,7 @@ This script scans repository export folders only. It does not connect to Home As
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +23,7 @@ SECTIONS = [
 def describe_file(path: Path) -> str:
     stat = path.stat()
     size = stat.st_size
-    modified = datetime.fromtimestamp(stat.st_mtime, timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    modified = datetime.fromtimestamp(stat.st_mtime, datetime.UTC).strftime("%Y-%m-%d %H:%M UTC")
     rel = path.relative_to(ROOT).as_posix()
     return f"- `{rel}` — {size} bytes — modified {modified}"
 
