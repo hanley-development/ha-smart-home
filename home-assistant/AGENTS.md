@@ -6,13 +6,14 @@ This directory contains documentation, exports, snapshots, and optional source-c
 
 Home Assistant itself is the source of truth for most UI-managed objects.
 
-Prefer MCP for creating and modifying:
+Prefer ha-mcp for creating and modifying:
 
 - helpers
 - automations
 - dashboards
 - areas
 - labels
+- categories
 - scenes
 - scripts, when UI-managed
 
@@ -20,15 +21,15 @@ Do not assume new Home Assistant objects must be created as YAML packages.
 
 ## Preferred operating model
 
-Use MCP-first object management.
+Use ha-mcp-first object management.
 
-For new helpers and automations:
+For new helpers, automations, and scripts:
 
-1. Use MCP to inspect existing entities, helpers, automations, areas, labels, and services.
-2. Propose the helper or automation design.
+1. Use ha-mcp to inspect existing entities, helpers, automations, scripts, areas, labels, categories, and services.
+2. Propose the design.
 3. Ask for explicit approval before creating or modifying anything.
-4. Use MCP to create or modify the approved Home Assistant object.
-5. Verify the object exists through MCP.
+4. Use ha-mcp to create or modify the approved Home Assistant object.
+5. Verify the object exists through ha-mcp.
 6. Export or document the resulting YAML/config snapshot in this repo.
 
 ## Repo storage model
@@ -39,16 +40,17 @@ Use this repo to store:
 - exported automation YAML
 - helper design notes
 - helper export snapshots
+- script export snapshots
 - dashboard plans
 - dashboard card plans
-- MCP change logs
+- ha-mcp change logs
 - package YAML only when source-controlled YAML is intentionally needed
 
 Do not use this repo as the primary source of truth for UI-managed Home Assistant objects unless explicitly stated.
 
 ## Automations
 
-Automations are normally created and managed through Home Assistant/MCP.
+Automations are normally created and managed through Home Assistant/ha-mcp.
 
 Store automation snapshots under:
 
@@ -58,9 +60,26 @@ home-assistant/automations/exports/
 
 Automation export files are for review, documentation, and rollback reference unless the user explicitly says they are source-controlled live config.
 
+Automations should be:
+
+- readable
+- safe
+- reloadable
+- resilient to `unknown` and `unavailable`
+- explicit about triggers, conditions, and actions
+- careful with delays, repeats, and modes
+- designed to fail safely
+
+Preferred modes:
+
+- `single` for simple one-shot automations
+- `restart` for state-machine automations
+- `queued` for ordered actions or notifications
+- `parallel` only when clearly safe
+
 ## Helpers
 
-Helpers are normally created and managed through Home Assistant/MCP.
+Helpers are normally created and managed through Home Assistant/ha-mcp.
 
 Store helper snapshots or notes under:
 
@@ -69,6 +88,20 @@ home-assistant/helpers/exports/
 ```
 
 Do not create helper YAML packages unless explicitly asked.
+
+## Scripts
+
+Scripts are normally created and managed through Home Assistant/ha-mcp.
+
+Store script snapshots under:
+
+```text
+home-assistant/scripts/exports/
+```
+
+Do not run scripts unless explicitly approved.
+
+Scripts with unknown behavior should be inspected before being run, especially if they may control safety-sensitive devices.
 
 ## Packages
 
@@ -86,7 +119,7 @@ Good package use cases:
 
 Do not create new packages by default.
 
-Ask first before converting UI-managed automations or helpers into packages.
+Ask first before converting UI-managed automations, helpers, or scripts into packages.
 
 ## Dashboards
 
@@ -98,63 +131,35 @@ Do not:
 - edit `.storage`
 - convert UI dashboards to YAML
 
-Use MCP/UI-supported dashboard tools.
+Use ha-mcp/UI-supported dashboard tools.
 
 Store dashboard plans under:
 
 ```text
 home-assistant/dashboards/plans/
 ```
+
 This project does not use YAML-managed dashboards.
 
 ## Safety
 
-Creating, modifying, enabling, disabling, deleting, or triggering automations through MCP requires explicit approval.
+Creating, modifying, enabling, disabling, deleting, or triggering automations through ha-mcp requires explicit approval.
 
-Creating or modifying helpers through MCP requires approval.
+Creating or modifying helpers through ha-mcp requires approval.
 
-Automations that control safety-sensitive devices require extra confirmation.
+Creating, modifying, deleting, or running scripts through ha-mcp requires explicit approval.
+
+Dashboard changes through ha-mcp require explicit approval.
+
+Automations or scripts that control safety-sensitive devices require extra confirmation.
 
 Safety-sensitive devices include locks, garage doors, alarm systems, HVAC, cameras, water valves, sirens, and security devices.
 
 Notification-only automations are lower risk, but still require approval before creation.
 
-## Automation rules
-
-Automations should be:
-
-- readable
-- safe
-- reloadable
-- resilient to `unknown` and `unavailable`
-- explicit about triggers, conditions, and actions
-- careful with delays, repeats, and modes
-
-Preferred modes:
-
-- `single` for simple one-shot automations
-- `restart` for state-machine automations
-- `queued` for ordered actions or notifications
-- `parallel` only when clearly safe
-
-## Safety-sensitive devices
-
-Require explicit approval before creating automations that control:
-
-- locks
-- garage doors
-- alarm systems
-- HVAC
-- cameras
-- water valves
-- sirens
-- security devices
-
-Notification-only automations are preferred first.
-
 ## Validation
 
-After MCP creates or modifies an object:
+After ha-mcp creates or modifies an object:
 
 - verify it exists
 - verify key entities are correct
