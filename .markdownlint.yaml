@@ -4,12 +4,17 @@ MD007:
   indent: 2
 
 MD013:
-  line_length: 160
+  line_length: 240
   code_blocks: false
   tables: false
 
 MD024:
   siblings_only: true
 
+# This repo uses compact tables in agent-facing docs.
+MD060: false
+
+# Agent/rules docs may contain inline HTML and may not always start with H1
+# when embedded or copied into prompts.
 MD033: false
 MD041: false
