@@ -50,12 +50,26 @@ def main() -> int:
         print("PyYAML is not installed. Install it locally with: python -m pip install pyyaml")
         return 2
 
+    class HomeAssistantYamlLoader(yaml.SafeLoader):
+        """Parse Home Assistant YAML tags such as !input without resolving them."""
+
+    def construct_home_assistant_tag(loader: HomeAssistantYamlLoader, tag_suffix: str, node):
+        if isinstance(node, yaml.ScalarNode):
+            return loader.construct_scalar(node)
+        if isinstance(node, yaml.SequenceNode):
+            return loader.construct_sequence(node)
+        if isinstance(node, yaml.MappingNode):
+            return loader.construct_mapping(node)
+        return None
+
+    HomeAssistantYamlLoader.add_multi_constructor("!", construct_home_assistant_tag)
+
     failures: list[str] = []
     files = iter_yaml_files()
 
     for path in files:
         try:
-            yaml.safe_load(path.read_text(encoding="utf-8"))
+            yaml.load(path.read_text(encoding="utf-8"), Loader=HomeAssistantYamlLoader)
         except Exception as exc:  # noqa: BLE001 - report parser errors from PyYAML
             rel = path.relative_to(ROOT).as_posix()
             failures.append(f"{rel}: {exc}")

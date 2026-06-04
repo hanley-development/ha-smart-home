@@ -22,3 +22,9 @@ line-ending = "lf"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.12",
+    "yamllint>=1.38.0",
+]

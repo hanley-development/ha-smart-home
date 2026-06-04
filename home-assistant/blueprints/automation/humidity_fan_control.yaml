@@ -1,0 +1,171 @@
+blueprint:
+  name: Humidity Fan Control
+  description: >
+    Turn a fan on when humidity stays at or above a threshold, and turn it off
+    when humidity stays below the threshold.
+  domain: automation
+  input:
+    humidity_sensor:
+      name: Humidity sensor
+      description: Sensor that reports relative humidity.
+      selector:
+        entity:
+          domain: sensor
+
+    fan_entity:
+      name: Fan
+      description: Fan entity to control.
+      selector:
+        entity:
+          domain: fan
+
+    humidity_threshold:
+      name: Humidity threshold
+      description: Choose a fixed percentage, input_number helper, or numeric entity.
+      default:
+        active_choice: Fixed number
+        Fixed number: 60
+      selector:
+        choose:
+          choices:
+            Fixed number:
+              selector:
+                number:
+                  min: 0
+                  max: 100
+                  step: 1
+                  unit_of_measurement: "%"
+                  mode: box
+            Input number helper:
+              selector:
+                entity:
+                  domain: input_number
+            Numeric entity:
+              selector:
+                entity:
+                  domain:
+                    - sensor
+                    - number
+                    - input_number
+
+    turn_on_delay:
+      name: Turn-on delay
+      description: How long humidity must stay at or above the threshold before turning on the fan.
+      default:
+        hours: 0
+        minutes: 0
+        seconds: 30
+      selector:
+        duration:
+
+    turn_off_delay:
+      name: Turn-off delay
+      description: How long humidity must stay below the threshold before turning off the fan.
+      default:
+        hours: 0
+        minutes: 15
+        seconds: 0
+      selector:
+        duration:
+
+mode: restart
+
+trigger_variables:
+  humidity_sensor: !input humidity_sensor
+  fan_entity: !input fan_entity
+  humidity_threshold: !input humidity_threshold
+
+trigger:
+  - platform: state
+    entity_id: !input fan_entity
+    to: "off"
+    id: turn_on
+    for: !input turn_on_delay
+
+  - platform: state
+    entity_id: !input humidity_sensor
+    id: turn_on
+    for: !input turn_on_delay
+
+  - platform: template
+    id: turn_on
+    value_template: >-
+      {% set humidity = states(humidity_sensor) | float(default=none) %}
+      {% set choice = humidity_threshold.active_choice %}
+      {% if choice == 'Input number helper' %}
+        {% set threshold = states(humidity_threshold['Input number helper']) | float(default=none) %}
+      {% elif choice == 'Numeric entity' %}
+        {% set threshold = states(humidity_threshold['Numeric entity']) | float(default=none) %}
+      {% else %}
+        {% set threshold = humidity_threshold['Fixed number'] | float(default=none) %}
+      {% endif %}
+      {{ humidity is not none and threshold is not none and is_state(fan_entity, 'off') and humidity >= threshold }}
+    for: !input turn_on_delay
+
+  - platform: state
+    entity_id: !input fan_entity
+    to: "on"
+    id: turn_off
+    for: !input turn_off_delay
+
+  - platform: state
+    entity_id: !input humidity_sensor
+    id: turn_off
+    for: !input turn_off_delay
+
+  - platform: template
+    id: turn_off
+    value_template: >-
+      {% set humidity = states(humidity_sensor) | float(default=none) %}
+      {% set choice = humidity_threshold.active_choice %}
+      {% if choice == 'Input number helper' %}
+        {% set threshold = states(humidity_threshold['Input number helper']) | float(default=none) %}
+      {% elif choice == 'Numeric entity' %}
+        {% set threshold = states(humidity_threshold['Numeric entity']) | float(default=none) %}
+      {% else %}
+        {% set threshold = humidity_threshold['Fixed number'] | float(default=none) %}
+      {% endif %}
+      {{ humidity is not none and threshold is not none and is_state(fan_entity, 'on') and humidity < threshold }}
+    for: !input turn_off_delay
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: turn_on
+          - condition: template
+            value_template: >-
+              {% set humidity = states(humidity_sensor) | float(default=none) %}
+              {% set choice = humidity_threshold.active_choice %}
+              {% if choice == 'Input number helper' %}
+                {% set threshold = states(humidity_threshold['Input number helper']) | float(default=none) %}
+              {% elif choice == 'Numeric entity' %}
+                {% set threshold = states(humidity_threshold['Numeric entity']) | float(default=none) %}
+              {% else %}
+                {% set threshold = humidity_threshold['Fixed number'] | float(default=none) %}
+              {% endif %}
+              {{ humidity is not none and threshold is not none and is_state(fan_entity, 'off') and humidity >= threshold }}
+        sequence:
+          - service: fan.turn_on
+            target:
+              entity_id: !input fan_entity
+
+      - conditions:
+          - condition: trigger
+            id: turn_off
+          - condition: template
+            value_template: >-
+              {% set humidity = states(humidity_sensor) | float(default=none) %}
+              {% set choice = humidity_threshold.active_choice %}
+              {% if choice == 'Input number helper' %}
+                {% set threshold = states(humidity_threshold['Input number helper']) | float(default=none) %}
+              {% elif choice == 'Numeric entity' %}
+                {% set threshold = states(humidity_threshold['Numeric entity']) | float(default=none) %}
+              {% else %}
+                {% set threshold = humidity_threshold['Fixed number'] | float(default=none) %}
+              {% endif %}
+              {{ humidity is not none and threshold is not none and is_state(fan_entity, 'on') and humidity < threshold }}
+        sequence:
+          - service: fan.turn_off
+            target:
+              entity_id: !input fan_entity
