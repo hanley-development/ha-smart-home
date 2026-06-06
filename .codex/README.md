@@ -4,7 +4,6 @@ This folder contains Codex-facing helper material for this Home Assistant + ha-m
 
 ## Files
 
-- `config.toml.example` — reference MCP configuration. Keep real private URLs and credentials out of the repo.
 - `prompts/` — copy/paste starter prompts for common Home Assistant tasks.
 - `agents/` — subagent-style role prompts. Use these as scoped task instructions when the Codex app supports agent/task delegation, or paste them into a normal prompt when it does not.
 
