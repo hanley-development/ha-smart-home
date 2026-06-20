@@ -132,3 +132,7 @@ www/tmp/
 *.dump
 *.backup
 *.gz
+
+.projectmem/events.jsonl
+.projectmem/watch.pid
+.projectmem/watch.log

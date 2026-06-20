@@ -11,6 +11,31 @@ Migrated the following former YAML template sensors to UI-managed Home Assistant
 - `sensor.gas_energy_metric`
 - `sensor.water_energy_metric`
 
+## Additional recreated helper entities
+
+- `sensor.water_price_rate`
+- `sensor.home_lights`
+- `sensor.washer_door_lock`
+- `sensor.washer_time_display`
+- `sensor.dryer_time_display`
+- `sensor.guest_bedroom_fire_tv_source`
+- `sensor.living_room_fire_tv_source`
+
+## Intentionally skipped / deferred
+
+- `sensor.current_lights_on`
+  - Replaced by the new UI-managed helper `sensor.home_lights` to avoid keeping a duplicate entity with the same purpose.
+- `sensor.blank`
+  - Placeholder-style empty template; not recreated as a helper.
+- `sensor.spire_ft3_price_rate`
+  - Existing entity already present in Home Assistant but currently stale/`unavailable`; not recreated in this pass.
+- `mini_washer_*`
+  - Deferred because the expected source entities were not verified during discovery.
+- `history_stats` sensors
+  - Kept out of this template-helper pass because they are not template helpers.
+- `time_date` sensors
+  - Integration-managed; not part of template-helper migration.
+
 ## Original source templates
 
 ### Dead ZWave Devices
@@ -136,3 +161,6 @@ Migrated the following former YAML template sensors to UI-managed Home Assistant
 - `Date and time` was recreated because existing references still depend on `sensor.date_and_time`.
 - The recreated helper version of `Date and time` includes a guard for `unknown`/`unavailable` source values.
 - `Dead ZWave Devices` was successfully recreated as a UI-managed template helper including its custom `entity_id` attribute template.
+- `Water Price Rate` was recreated and verified with state `0.00481`.
+- The former `current_lights_on` YAML sensor was not recreated under the same entity ID; a new UI-managed helper `sensor.home_lights` was created instead by user choice to avoid a duplicate legacy-style entity.
+- `Washer Door Lock`, `Washer Time Display`, `Dryer Time Display`, `Guest Bedroom Fire TV Source`, and `Living Room Fire TV Source` were recreated and verified.
