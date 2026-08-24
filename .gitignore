@@ -6,6 +6,7 @@
 .idea/
 .DS_Store
 Thumbs.db
+.worktrees/
 
 # ------------------------------------------------------------
 # Personal notes / editor metadata
