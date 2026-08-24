@@ -5,7 +5,7 @@
 - Floor classification: Basement
 - Area: Mikes Office
 - Devices: 22
-- Entities: 401
+- Entities: 402
 - Inclusion rule: assigned to this Basement-floor area.
 
 ## Devices
@@ -39,6 +39,7 @@
 
 | Entity ID | Friendly name | Domain |
 |---|---|---|
+| `automation.mikes_office_night_light_motion` | Mikes Office Nightlight | automation |
 | `automation.test_automation2` | Mikes Office SmartThings Button - MQTT | automation |
 | `binary_sensor.mikes_office_ceiling_fan_update_available` | binary_sensor.mikes_office_ceiling_fan_update_available | binary_sensor |
 | `binary_sensor.mikes_office_light_overheat` | binary_sensor.mikes_office_light_overheat | binary_sensor |

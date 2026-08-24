@@ -1,6 +1,6 @@
 # Basement Device Area Migration
 
-Status: Proposed; not applied to Home Assistant.
+Status: Applied and verified in Home Assistant on 2026-08-24.
 
 ## Purpose
 
@@ -65,3 +65,12 @@ Target area ID: `basement_entertainment`
 5. Read all 18 devices back and verify their target area IDs.
 6. Refresh `docs/zones/basement/` from live Home Assistant.
 7. If verification fails, assign the affected device back to `basement`.
+
+## Result
+
+- Applied all 18 reviewed device-area updates.
+- Assigned 2 Sense devices to `energy`.
+- Assigned 16 non-Sense devices to `basement_entertainment`.
+- Read all 18 devices back through ha-mcp.
+- Verified 18 of 18 devices reported the intended target area.
+- No physical device service was called and no device was operated, renamed, disabled, or reconfigured.

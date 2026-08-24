@@ -8,16 +8,16 @@ This directory inventories devices and entities assigned to the Home Assistant `
 
 | Area | Floor classification | Devices | Entities | Inventory |
 |---|---|---:|---:|---|
-| Basement | Basement | 18 | 692 | [View](basement.md) |
+| Basement | Basement | 0 | 0 | [View](basement.md) |
 | Home-Assistant | Basement | 111 | 469 | [View](home-assistant.md) |
-| Mikes Office | Basement | 22 | 401 | [View](mikes-office.md) |
+| Mikes Office | Basement | 22 | 402 | [View](mikes-office.md) |
 | Network | Basement | 20 | 533 | [View](network.md) |
 | Server Room | Basement | 20 | 172 | [View](server-room.md) |
 | Utility Room | Basement | 12 | 225 | [View](utility-room.md) |
 | Basement Bathroom | Basement | 4 | 309 | [View](basement-bathroom.md) |
-| Basement Entertainment | Basement | 22 | 174 | [View](basement-entertainment.md) |
+| Basement Entertainment | Basement | 38 | 851 | [View](basement-entertainment.md) |
 | Unassigned | Unassigned | 3 | 27 | [View](unassigned.md) |
-| Energy | Outside Basement floor | 0 | 10 | [View](energy.md) |
+| Energy | Outside Basement floor | 2 | 24 | [View](energy.md) |
 | Security | Outside Basement floor | 1 | 20 | [View](security.md) |
 | **Total** |  | **233** | **3,032** |  |
 
