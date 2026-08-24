@@ -1,0 +1,10 @@
+{
+  "aiboarding_version": 2,
+  "canonical_file": "AGENTS.md",
+  "claude_wrapper": "CLAUDE.md",
+  "generated": "2026-08-23",
+  "last_synced_commit": "51e6c29eed07b4b903fbecfc31440566bfe0ee8c",
+  "receipts": [
+    { "file": "AGENTS.md", "level": "full", "bytes_before": 14084, "bytes_after": 14084, "lines_before": 223, "lines_after": 223, "tokens_before_approx": 3521, "tokens_after_approx": 3521, "measured_at": "2026-08-23" }
+  ]
+}
