@@ -1,14 +1,15 @@
 # Areas
 
-Current Home Assistant areas as of 2026-04-23.
+Current Home Assistant areas as of 2026-08-24.
 
-Total: 40
+Total: 41
 
 - Adelynns Room
 - Backyard
 - Backyard Patio
 - Basement
 - Basement Bathroom
+- Basement Entertainment
 - Blinds
 - Calebs Room
 - Energy
