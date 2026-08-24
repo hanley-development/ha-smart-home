@@ -8,6 +8,7 @@ Task:
 Build a concise Home Assistant inventory overview for this repo.
 
 Include:
+
 - areas and floors
 - labels and categories
 - helper count and major helper types

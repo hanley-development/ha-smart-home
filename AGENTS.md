@@ -4,9 +4,11 @@
 
 Automate building, organizing, maintaining, and validating Mike’s Home Assistant environment through `ha-mcp`.
 
-Scope includes dashboards, automations, scripts, scenes, helpers, alerts, templates, blueprints, entity and device registries, areas, floors, labels, categories, energy preferences, updates, integrations, ESPHome, Zigbee2MQTT, and related maintenance.
+Scope includes dashboards, automations, scripts, scenes, helpers, alerts, templates, blueprints, entity and device registries, areas, floors, labels, categories,
+energy preferences, updates, integrations, ESPHome, Zigbee2MQTT, and related maintenance.
 
-Prefer safe, reliable, maintainable behavior over clever complexity. Home Assistant provides live state and execution; this repository stores source-controlled configuration, backups, exports, plans, snapshots, rollback material, skills, and validation tools.
+Prefer safe, reliable, maintainable behavior over clever complexity. Home Assistant provides live state and execution; this repository stores source-controlled configuration,
+backups, exports, plans, snapshots, rollback material, skills, and validation tools.
 
 ## Stack and Runtime
 
@@ -30,13 +32,9 @@ Do not install packages, modules, CLIs, integrations, add-ons, custom cards, fir
 
 This is an operations and configuration workspace, not a standalone application. It has no local production server.
 
-Install the locked development environment only after dependency installation is approved:
+Install the locked development environment only after dependency installation is approved: `uv sync --group dev`
 
-`uv sync --group dev`
-
-Fast repository check:
-
-`uv run python tools/run_codex_checks.py --skip-index`
+Fast repository check: `uv run python tools/run_codex_checks.py --skip-index`
 
 Focused checks:
 
@@ -53,7 +51,8 @@ PowerShell entry point:
 
 `tools/run_codex_checks.py` without `--skip-index` updates `home-assistant/EXPORT_INDEX.md`; use it only when that generated change is intended.
 
-Home Assistant configuration validation and live read-back occur through approved Home Assistant or `ha-mcp` operations. ESPHome configuration validation uses `esphome config path/to/device.yaml`; compile and upload require separate approval.
+Home Assistant configuration validation and live read-back occur through approved Home Assistant or `ha-mcp` operations. Validate ESPHome changes through the installed
+ESPHome Device Builder against the exact changed device configuration; compile and upload require separate approval.
 
 ## Architecture Map
 
@@ -90,7 +89,8 @@ Preferred source-controlled change flow:
 
 Dedicated `ha-mcp` object tools are preferred over filesystem or YAML-editing tools. Beta file/YAML tools are exceptional and require a clear path, backup, validation, rollback plan, and explicit approval.
 
-Dashboard flow differs: inspect live state, save a plan or snapshot, propose the exact UI-managed change, obtain approval, update through the supported dashboard interface, and read it back. Never convert dashboards to YAML or edit Home Assistant `.storage`.
+Dashboard flow differs: inspect live state, save a plan or snapshot, propose the exact UI-managed change, obtain approval, update through the supported dashboard interface,
+and read it back. Never convert dashboards to YAML or edit Home Assistant `.storage`.
 
 Dependency direction:
 
@@ -122,23 +122,28 @@ Core invariants:
 
 ## Agent Guardrails
 
-Every Home Assistant MCP call requires explicit approval for the exact current action scope. Show the intended tool or operation, target, request body or YAML when applicable, purpose, expected effect, risks, and verification before calling it.
+Every Home Assistant MCP call requires explicit approval for the exact current action scope. Show the intended tool or operation, target, request body or YAML when applicable,
+purpose, expected effect, risks, and verification before calling it.
 
 Never overwrite live YAML without first reading and storing a backup. Never bypass validation, review, source control, or the approved deployment order.
 
 Never turn entities or devices on or off, call services, run scripts, trigger automations, change safety-sensitive objects, reload, restart, shut down, restore backups, or manage add-ons without explicit approval.
 
-Never install dependencies, packages, modules, integrations, add-ons, custom cards, blueprints from external sources, CLIs, tools, or firmware without explicit approval. Do not execute externally retrieved code without showing the exact code or command, explaining its behavior and risks, and receiving approval.
+Never install dependencies, packages, modules, integrations, add-ons, custom cards, blueprints from external sources, CLIs, tools, or firmware without explicit approval.
+Do not execute externally retrieved code without showing the exact code or command, explaining its behavior and risks, and receiving approval.
 
 Never overwrite, delete, or broadly restructure a dashboard without explicit approval. Do not create YAML dashboards, edit `.storage`, or convert UI-managed dashboards to YAML.
 
 Never expose, display, copy, persist, transmit, or commit credentials, tokens, webhook URLs, private keys, cookies, passwords, certificates, personal data, or Home Assistant secrets. Stop if sensitive data appears unexpectedly.
 
-Do not treat this repository as a blind mirror of Home Assistant `/config`. Respect `.codexignore`; avoid databases, logs, backups, generated files, caches, `.storage`, ESPHome build output, and dependency directories unless the user places a specific safe target in scope.
+Do not treat this repository as a blind mirror of Home Assistant `/config`. Respect `.codexignore`; avoid databases, logs, backups, generated files, caches, `.storage`,
+ESPHome build output, and dependency directories unless the user places a specific safe target in scope.
 
-Do not broadly rename, delete, migrate, or “simplify” entities, devices, areas, labels, automations, scripts, helpers, scenes, packages, dashboards, GPIO assignments, safety interlocks, or existing behavior without a reviewed dependency analysis and explicit approval.
+Do not broadly rename, delete, migrate, or “simplify” entities, devices, areas, labels, automations, scripts, helpers, scenes, packages, dashboards, GPIO assignments,
+safety interlocks, or existing behavior without a reviewed dependency analysis and explicit approval.
 
-Preserve comments and formatting where practical. Prefer focused patches. Do not commit, push, merge, pull, rebase, reset, clean, mass-format, or perform broad Git operations unless authorized for the task. Every push is an outbound action requiring explicit approval.
+Preserve comments and formatting where practical. Prefer focused patches. Do not commit, push, merge, pull, rebase, reset, clean, mass-format, or perform broad Git operations
+unless authorized for the task. Every push is an outbound action requiring explicit approval.
 
 Subagents, skills, child processes, and delegated workflows inherit these restrictions and receive no independent authority.
 
@@ -196,7 +201,7 @@ For live Home Assistant changes:
 
 For ESPHome changes:
 
-1. Run `esphome config path/to/device.yaml`.
+1. Validate the exact changed device configuration through ESPHome Device Builder.
 2. Review substitutions, includes, pins, interlocks, API, OTA, network, and relay behavior.
 3. Do not claim compile or upload success unless those separately approved operations actually ran and passed.
 

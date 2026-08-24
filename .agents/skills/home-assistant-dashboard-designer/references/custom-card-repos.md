@@ -60,6 +60,7 @@ Use these labels:
 | Entity Attributes Card                   | use-case  | [custom-cards/entity-attributes-card](https://github.com/custom-cards/entity-attributes-card) | Attributes Card    | diagnostics                                     | Avoid on family-facing dashboards                          |
 | Mail and Packages Custom Card            | legacy    | [custom-cards/mail-and-packages-card](https://github.com/custom-cards/mail-and-packages-card) | Mail Card          | mail/packages                                   | Check maintenance and sensors first                        |
 | Roomba Vacuum Card                       | legacy    | [custom-cards/roomba-vacuum-card](https://github.com/custom-cards/roomba-vacuum-card) | Vacuum Card        | Roomba control                                  | Prefer newer/general vacuum cards if possible              |
+
 ## Usage rule
 
 Do not choose a custom card because it is popular.

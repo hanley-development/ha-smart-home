@@ -9,6 +9,7 @@ Task:
 Design a feature-rich main dashboard plan with navigation buttons to sub-dashboards/views.
 
 Include:
+
 - Home overview
 - Security
 - Garage/doors/locks

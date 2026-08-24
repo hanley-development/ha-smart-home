@@ -7,6 +7,7 @@ Task:
 Plan an area dashboard for area: REPLACE_ME_AREA_NAME.
 
 Include:
+
 - lights
 - fans
 - climate sensors

@@ -3,8 +3,8 @@
   "canonical_file": "AGENTS.md",
   "claude_wrapper": "CLAUDE.md",
   "generated": "2026-08-23",
-  "last_synced_commit": "51e6c29eed07b4b903fbecfc31440566bfe0ee8c",
+  "last_synced_commit": "ae96def9b523cce1c7e047f7f099e83976abfcb3",
   "receipts": [
-    { "file": "AGENTS.md", "level": "full", "bytes_before": 14084, "bytes_after": 14084, "lines_before": 223, "lines_after": 223, "tokens_before_approx": 3521, "tokens_after_approx": 3521, "measured_at": "2026-08-23" }
+    { "file": "AGENTS.md", "level": "full", "bytes_before": 14162, "bytes_after": 14162, "lines_before": 219, "lines_after": 219, "tokens_before_approx": 3541, "tokens_after_approx": 3541, "measured_at": "2026-08-23" }
   ]
 }

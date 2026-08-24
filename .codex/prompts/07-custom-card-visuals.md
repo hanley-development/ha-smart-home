@@ -7,6 +7,7 @@ Task:
 Create an awesome visual card plan for: REPLACE_ME_DASHBOARD_OR_VIEW.
 
 Include:
+
 - built-in card option
 - Mushroom/button-card option if installed
 - advanced custom card option if installed

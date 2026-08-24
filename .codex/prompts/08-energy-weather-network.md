@@ -5,6 +5,7 @@ Task:
 Plan related-device dashboards for weather, appliances, energy, and network.
 
 Include:
+
 - available weather entities and forecast cards
 - appliance status and maintenance cards
 - energy/power graph candidates

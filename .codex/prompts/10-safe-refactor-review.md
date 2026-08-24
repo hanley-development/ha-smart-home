@@ -7,6 +7,7 @@ Task:
 Review this proposed refactor: REPLACE_ME_REFACTOR_DESCRIPTION.
 
 Check:
+
 - affected entities/helpers/automations/scripts/dashboards
 - safety-sensitive actions
 - naming or ID changes

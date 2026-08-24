@@ -7,6 +7,7 @@ Task:
 Build an automation for: REPLACE_ME_AUTOMATION_GOAL.
 
 Requirements:
+
 - use real entity IDs from ha-mcp
 - reuse helpers when appropriate
 - avoid unnecessary templates

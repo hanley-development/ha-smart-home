@@ -7,6 +7,7 @@ Task:
 Design a reusable Home Assistant script for: REPLACE_ME_SCRIPT_GOAL.
 
 Include:
+
 - fields/inputs
 - sequence steps
 - target entities/services

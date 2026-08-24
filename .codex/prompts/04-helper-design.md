@@ -7,6 +7,7 @@ Task:
 Design helpers for this feature: REPLACE_ME_FEATURE.
 
 Include:
+
 - helper type selection
 - proposed entity IDs
 - min/max/step/unit for numbers
