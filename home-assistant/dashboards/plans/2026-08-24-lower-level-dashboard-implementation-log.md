@@ -80,12 +80,16 @@
 
 ### 6. Utility Room
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 6 pre-read, write body, and read-back body were shown.
+- Pre-write hash: `ba05e236c78edf0a`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `2dccde3a160d0c76`.
+- Baseline comparison: the unique view remained at index 15 with title and path `Utility Room` / `utility_room`; `subview` changed from absent/false to `true`.
+  Five broad legacy groups were replaced by the approved four-card hierarchy. Relevant water, alert, sump, and lighting status remains; unrelated solar, gas, whole-home climate,
+  and direct water-shutoff control content was removed.
+- Read-back and invariant result: exact selected entities verified: `light.utility_room_light`, `binary_sensor.water_monitor_pending_system_alerts`, `binary_sensor.sump_pump`,
+  `sensor.water_monitor_water_flow_rate`, `sensor.water_monitor_water_pressure`, `sensor.water_monitor_water_temperature`, and `sensor.sump_pump_usage`; no explicit actions present.
+- Rollback status: required no; the complete pre-change `utility_room` view object remains available in the scoped baseline snapshot.
 
 ### 7. Server Room
 
