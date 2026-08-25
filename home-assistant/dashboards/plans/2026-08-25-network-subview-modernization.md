@@ -1,6 +1,6 @@
 # Network Subview Modernization Proposal
 
-**Status:** Applied and verified; seamless chip styling approved and pending
+**Status:** Applied and verified, including seamless metric-chip styling
 
 **Date:** 2026-08-25
 
@@ -283,3 +283,17 @@ Expected read-back:
 - All 13 metric rows have the exact Main Level-derived `card_mod` variables.
 - Every entity, template, color, chip count, and action remains unchanged.
 - No state-changing or navigation action is introduced.
+
+Styling implementation receipt:
+
+- Proposal commit: `8cea2b3`
+- Approved pre-write hash: `bff59e65d79e65ac`
+- Result: `write_committed: true`; `post_write_verified: true`
+- Post-write and scoped read-back hash: `4e5d61be13ee339b`
+- Read-back: `network` remains at view index 30 with 12 top-level cards
+- All 13 metric rows use `alignment: justify`
+- All 13 metric rows contain the exact transparent Main Level-derived style
+- Chip counts remain `[7, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 4]`
+- The only action value remains `more-info`; no forbidden control key is present
+- Home Assistant repeated the unrelated warning about one view without a stable
+  path; the styling write did not target that view

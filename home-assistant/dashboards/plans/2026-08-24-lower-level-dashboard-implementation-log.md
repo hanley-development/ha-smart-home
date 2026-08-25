@@ -74,6 +74,23 @@
 - Rollback status: the exact pre-modernization view is retained as
   `expected_current` in the proposal and requires a separately approved write.
 
+##### Seamless metric-chip styling
+
+- Status: applied and verified.
+- Proposal commit: `8cea2b3`, pushed before the live styling write.
+- Approval reference: the exact guarded styling write and scoped read-back were
+  approved together.
+- Pre-write hash: `bff59e65d79e65ac`.
+- Operation body/result: `write_committed: true`; `post_write_verified: true`;
+  post-write/read-back hash `4e5d61be13ee339b`.
+- Read-back result: all 13 Network metric rows use `alignment: justify` and the
+  exact transparent Main Level-derived `card_mod` style; chip counts and all
+  entity/template content remain unchanged.
+- Interaction and safety result: only `more-info` actions; no forbidden control
+  key was introduced.
+- Rollback status: remove only the added `card_mod` objects and restore the 13
+  metric rows to `alignment: start` through a separately approved guarded write.
+
 ### 4. Home-Assistant
 
 - Status: complete and verified.
