@@ -1,6 +1,6 @@
 # Network Subview Modernization Proposal
 
-**Status:** Approved design; pending repository review and live-write approval
+**Status:** Applied and verified
 
 **Date:** 2026-08-25
 
@@ -206,3 +206,25 @@ After a separately approved live write:
    remain unique.
 5. If the write or read-back differs, stop. Restoring `expected_current` is a
    separate write requiring its own exact approval.
+
+## Implementation receipt
+
+- Proposal commit: `7c194de`
+- Proposal branch: `origin/feature/lower-level-dashboard`
+- Approved pre-write hash: `4e5c06aefe9337ca`
+- Result: `write_committed: true`; `post_write_verified: true`
+- Post-write and read-back hash: `bff59e65d79e65ac`
+- Read-back: `network` at view index 30; title and path `Network` / `network`;
+  `subview: true`; 12 top-level cards; 13 device blocks; 89 entity references
+  and 88 unique entity IDs
+- Sections: Network, Gateway, Access Points, Switches, Other Infrastructure,
+  and Firmware
+- Interaction verification: the only action value is `more-info`; no service,
+  target, navigation, script, automation, restart, power, PoE, or port-control
+  key is present
+- Stale-entity verification: the removed legacy gateway and aggregation entity
+  IDs are absent
+- Home Assistant warning: one unrelated dashboard view lacks a stable path and
+  uses a fragile numeric render index; this warning existed before the write
+- Rollback source: the literal `expected_current` object above remains usable
+  through a separately approved guarded write

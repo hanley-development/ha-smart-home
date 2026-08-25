@@ -53,6 +53,27 @@
   No gateway, switch, access point, PoE, reboot, power, service, automation, or script action present.
 - Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
+#### 2026-08-25 Network modernization
+
+- Status: applied and verified.
+- Proposal: `2026-08-25-network-subview-modernization.md`, committed and pushed
+  as `7c194de` before the live write.
+- Approval reference: exact guarded write and immediate scoped read-back were
+  approved together.
+- Pre-write hash: `4e5c06aefe9337ca`.
+- Operation body/result: `write_committed: true`; `post_write_verified: true`;
+  post-write/read-back hash `bff59e65d79e65ac`.
+- Read-back and invariant result: path `network` at view index 30; title
+  `Network`; `subview: true`; 12 top-level cards, 13 infrastructure blocks, 89
+  entity references, and 88 unique entity IDs.
+- Section order: Network, Gateway, Access Points, Switches, Other
+  Infrastructure, and Firmware.
+- Interaction and safety result: only `more-info` action values; no service,
+  target, navigation, script, automation, restart, power, PoE, or port-control
+  key. Removed stale gateway and aggregation entity IDs are absent.
+- Rollback status: the exact pre-modernization view is retained as
+  `expected_current` in the proposal and requires a separately approved write.
+
 ### 4. Home-Assistant
 
 - Status: complete and verified.
