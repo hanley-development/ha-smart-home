@@ -67,12 +67,16 @@
 
 ### 5. Mike's Office
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 5 pre-read, write body, and read-back body were shown.
+- Pre-write hash: `1bf172960a160164`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `ba05e236c78edf0a`.
+- Baseline comparison: the unique view remained at index 18 and retained path `office-of-mike` and `subview: true`; title changed from `Office of Mike` to `Mike's Office`.
+  The five legacy top-level groups, including duplicated monitor controls, remote/media controls, direct service calls, ADB commands, and toggle actions, were replaced by the approved four-card hierarchy.
+- Read-back and invariant result: title `Mike's Office`; four top-level cards; exact selected entities verified: `light.mikes_office_light`,
+  `light.mikes_office_motion_nightlight`, `fan.mikes_office_ceiling_fan`, `fan.office_of_mike_core_300s`, `sensor.mikes_office_airthings_temperature`,
+  `sensor.mikes_office_airthings_humidity`, and `binary_sensor.mikes_office_motion_nightlight_update_available`; no explicit actions present.
+- Rollback status: required no; the complete pre-change `office-of-mike` view object remains available in the scoped baseline snapshot.
 
 ### 6. Utility Room
 
