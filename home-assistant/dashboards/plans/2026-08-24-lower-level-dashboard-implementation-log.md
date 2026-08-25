@@ -98,6 +98,7 @@
 
 ## Deviations and Rollback Status
 
-- Deviations: none recorded; rollout has not begun.
+- 2026-08-24 attempted Stage 1 write: the dashboard tool rejected the submitted Python transform at schema security validation because it contained an import. No dashboard mutation occurred, no target view was created, and the subsequent live verification found the dashboard unchanged. Stage 1 remains not started; this is a failed preflight/write attempt, not a rollout receipt.
+- Remediation: the proposal now uses import-free transforms restricted to the tool's documented safe operations. Any retry still requires a new exact approval packet, fresh read, fresh hash, and read-back.
 - Rollback status: no live change has been made.
 - Known limitation: the pre-change artifact provides scoped restore objects for the four existing paths and absence receipts for four new paths; it is not a whole-dashboard restore payload.

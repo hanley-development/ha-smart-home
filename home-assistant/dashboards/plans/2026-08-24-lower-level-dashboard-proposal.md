@@ -4,7 +4,7 @@
 
 This is a non-deployable, reviewed proposal for the UI-managed `Georgetown-HAAS` dashboard at `url_path: "default"`. It neither changes Home Assistant nor authorizes a dashboard write. Every write must use a fresh approved read, the returned `config_hash`, the execution-time `BestPracticeKey`, and a separately approved literal body.
 
-The scoped baseline intentionally does not retain a whole-dashboard payload: the broad read contained sensitive configuration and was discarded. Therefore the `living-areas` transform below is literal about the seven replacement cards and is deliberately title-bounded: it verifies unique `Main Level`, `Lower Level`, and `Upper Level` anchors before changing only the Lower Level slice. It rejects any drift rather than guessing or reconstructing Main/Upper JSON.
+The scoped baseline intentionally does not retain a whole-dashboard payload: the broad read contained sensitive configuration and was discarded. Therefore the `living-areas` transform below is literal about the seven replacement cards and verifies the committed three-section shape before changing only the Lower Level grid. It rejects any drift rather than guessing or reconstructing Main/Upper JSON.
 
 ## Verified building blocks
 
@@ -275,120 +275,125 @@ The following are the complete Lower Level content blocks used by the guarded `l
 
 ## Guarded stage transforms
 
-For every stage, the execution operator must first obtain approval for `ha_config_get_dashboard({"url_path":"default","force_reload":true})`. The approved `ha_config_set_dashboard` body uses `url_path: "default"`, `config_hash: "${EXECUTION_TIME_CONFIG_HASH}"`, `best_practice_key: "${EXECUTION_TIME_BEST_PRACTICE_KEY}"`, the complete literal `python_transform` in that stage below, and `return_screenshot: false`. The hash and BestPracticeKey are the only execution-time values; each transform is otherwise fully literal.
+For every stage, the execution operator must first obtain approval for `ha_config_get_dashboard({"url_path":"default","force_reload":true})`. The approved `ha_config_set_dashboard` body uses `url_path: "default"`, `config_hash: "${EXECUTION_TIME_CONFIG_HASH}"`, `BestPracticeKey: "${EXECUTION_TIME_BEST_PRACTICE_KEY}"`, the complete literal `python_transform` in that stage below, and `return_screenshot: false`. The hash and BestPracticeKey are the only execution-time values; each transform is otherwise fully literal.
+
+### Python-transform security compatibility
+
+The dashboard transform schema rejects imports. Every transform below is intentionally limited to literal dictionaries/lists, variable assignment, list comprehensions, `assert`, `len`, equality comparison, dictionary/list indexing, and list `append` or assignment. It contains no import, function/class definition, exception handling, loop statement, dynamic execution, dunder name, or filesystem/network operation.
 
 ### Stage 1: create `basement-entertainment`
 
 ```python
-from copy import deepcopy
-
 target_path = "basement-entertainment"
 replacement = {"theme":"Mushroom","title":"Basement Entertainment","path":"basement-entertainment","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Basement Entertainment","subtitle":"Status, everyday controls, and media"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"light.basement_main_light","name":"Main Light"},{"type":"tile","entity":"light.basement_bar_light","name":"Bar Light"},{"type":"tile","entity":"fan.basement_living_room_fan","name":"Living Room Fan"},{"type":"tile","entity":"fan.basement_core_400","name":"Air Purifier"}]},{"type":"custom:mushroom-title-card","title":"Environment and media"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.basement_ecobee_sensor_temperature","name":"Temperature"},{"type":"tile","entity":"media_player.basement_receiver","name":"Receiver"},{"type":"tile","entity":"media_player.basement_firetv","name":"Fire TV"},{"type":"tile","entity":"media_player.samsung_qn90ca_85","name":"TV"}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-assert all(view.get("path") != target_path for view in config["views"]), "target path is occupied"
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
+assert len(matches) == 0, "target path is occupied"
 config["views"].append(replacement)
 ```
 
 ### Stage 2: create `basement-bathroom`
 
 ```python
-from copy import deepcopy
-
 target_path = "basement-bathroom"
 replacement = {"theme":"Mushroom","title":"Basement Bathroom","path":"basement-bathroom","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Basement Bathroom","subtitle":"Lighting, ventilation, and moisture"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"light.basement_bathroom_light","name":"Bathroom Light"},{"type":"tile","entity":"light.basement_shower_light","name":"Shower Light"},{"type":"tile","entity":"fan.basement_bathroom_fan","name":"Ventilation Fan"}]},{"type":"custom:mushroom-title-card","title":"Environmental status"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.basement_bathroom_airguard_th_humidity","name":"Humidity"},{"type":"tile","entity":"sensor.basement_bathroom_airguard_th_temperature","name":"Temperature"},{"type":"tile","entity":"sensor.basement_bathroom_fan_humidity","name":"Fan Humidity"}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-assert all(view.get("path") != target_path for view in config["views"]), "target path is occupied"
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
+assert len(matches) == 0, "target path is occupied"
 config["views"].append(replacement)
 ```
 
 ### Stage 3: create `network`
 
 ```python
-from copy import deepcopy
-
 target_path = "network"
 replacement = {"theme":"Mushroom","title":"Network","path":"network","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Network","subtitle":"Read-only connectivity and equipment health"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"binary_sensor.unifi_dream_machine_wan_status","name":"WAN Status","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.unifi_dream_machine_wan_status","name":"Gateway Status","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.usw_aggregation_clients","name":"Aggregation Clients","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.us_8_poe_150w_clients","name":"US 8 Clients","tap_action":{"action":"more-info"}}]},{"type":"custom:mushroom-title-card","title":"Connectivity diagnostics"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.usw_aggregation_uptime","name":"Aggregation Uptime","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.us_8_poe_150w_uptime","name":"US 8 Uptime","tap_action":{"action":"more-info"}}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-assert all(view.get("path") != target_path for view in config["views"]), "target path is occupied"
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
+assert len(matches) == 0, "target path is occupied"
 config["views"].append(replacement)
 ```
 
 ### Stage 4: create `home-assistant`
 
 ```python
-from copy import deepcopy
-
 target_path = "home-assistant"
 replacement = {"theme":"Mushroom","title":"Home-Assistant","path":"home-assistant","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Home-Assistant","subtitle":"Read-only platform health, updates, and backups"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.backup_backup_manager_state","name":"Backup Manager","tap_action":{"action":"more-info"}},{"type":"tile","entity":"binary_sensor.home_assistant_google_drive_backup_running","name":"Backup Running","tap_action":{"action":"more-info"}},{"type":"tile","entity":"update.home_assistant_core_update","name":"Core Update","tap_action":{"action":"more-info"}},{"type":"tile","entity":"update.home_assistant_operating_system_update","name":"OS Update","tap_action":{"action":"more-info"}}]},{"type":"custom:mushroom-title-card","title":"Backup history"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.backup_last_successful_automatic_backup","name":"Last Successful Backup","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.backup_next_scheduled_automatic_backup","name":"Next Scheduled Backup","tap_action":{"action":"more-info"}}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-assert all(view.get("path") != target_path for view in config["views"]), "target path is occupied"
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
+assert len(matches) == 0, "target path is occupied"
 config["views"].append(replacement)
 ```
 
 ### Stage 5: replace `office-of-mike`
 
 ```python
-from copy import deepcopy
-
 target_path = "office-of-mike"
 replacement = {"theme":"Mushroom","title":"Mike's Office","path":"office-of-mike","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Mike's Office","subtitle":"Lighting, comfort, and office equipment"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"light.mikes_office_light","name":"Office Light"},{"type":"tile","entity":"light.mikes_office_motion_nightlight","name":"Nightlight"},{"type":"tile","entity":"fan.mikes_office_ceiling_fan","name":"Ceiling Fan"},{"type":"tile","entity":"fan.office_of_mike_core_300s","name":"Air Purifier"}]},{"type":"custom:mushroom-title-card","title":"Environment and diagnostics"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.mikes_office_airthings_temperature","name":"Temperature"},{"type":"tile","entity":"sensor.mikes_office_airthings_humidity","name":"Humidity"},{"type":"tile","entity":"binary_sensor.mikes_office_motion_nightlight_update_available","name":"Nightlight Update Status"}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-matches = [index for index, view in enumerate(config["views"]) if view.get("path") == target_path]
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
 assert len(matches) == 1, "expected one reusable view"
-config["views"][matches[0]] = replacement
+view_index = [index for index in range(len(config["views"])) if config["views"][index]["path"] == target_path]
+assert len(view_index) == 1, "expected one reusable index"
+config["views"][view_index[0]] = replacement
 ```
 
 ### Stage 6: replace `utility_room`
 
 ```python
-from copy import deepcopy
-
 target_path = "utility_room"
 replacement = {"theme":"Mushroom","title":"Utility Room","path":"utility_room","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Utility Room","subtitle":"Leak, water, lighting, and mechanical status"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"light.utility_room_light","name":"Utility Room Light"},{"type":"tile","entity":"binary_sensor.water_monitor_pending_system_alerts","name":"Water Monitor Alerts"},{"type":"tile","entity":"binary_sensor.sump_pump","name":"Sump Pump Power"}]},{"type":"custom:mushroom-title-card","title":"Water and environment"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.water_monitor_water_flow_rate","name":"Water Flow"},{"type":"tile","entity":"sensor.water_monitor_water_pressure","name":"Water Pressure"},{"type":"tile","entity":"sensor.water_monitor_water_temperature","name":"Water Temperature"},{"type":"tile","entity":"sensor.sump_pump_usage","name":"Sump Pump Power"}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-matches = [index for index, view in enumerate(config["views"]) if view.get("path") == target_path]
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
 assert len(matches) == 1, "expected one reusable view"
-config["views"][matches[0]] = replacement
+view_index = [index for index in range(len(config["views"])) if config["views"][index]["path"] == target_path]
+assert len(view_index) == 1, "expected one reusable index"
+config["views"][view_index[0]] = replacement
 ```
 
 ### Stage 7: replace `server-room`
 
 ```python
-from copy import deepcopy
-
 target_path = "server-room"
 replacement = {"theme":"Mushroom","title":"Server Room","path":"server-room","subview":True,"badges":[],"cards":[{"type":"custom:mushroom-title-card","title":"Server Room","subtitle":"Read-only equipment health and temperature"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.server_rack_airguard_th_temperature","name":"Rack Temperature","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.cyberpower_status","name":"UPS Status","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.cyberpower_battery_charge","name":"UPS Battery","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.cyberpower_load","name":"UPS Load","tap_action":{"action":"more-info"}}]},{"type":"custom:mushroom-title-card","title":"Storage temperatures"},{"type":"grid","square":False,"columns":2,"cards":[{"type":"tile","entity":"sensor.mediastorage_temperature","name":"Media Storage","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.r2d2_temperature","name":"R2D2","tap_action":{"action":"more-info"}},{"type":"tile","entity":"sensor.tripp_lite_ups_status","name":"Tripp Lite UPS","tap_action":{"action":"more-info"}}]}]}
 assert replacement["path"] == target_path
-assert replacement["subview"] is True
-matches = [index for index, view in enumerate(config["views"]) if view.get("path") == target_path]
+assert replacement["subview"] == True
+matches = [view for view in config["views"] if view["path"] == target_path]
 assert len(matches) == 1, "expected one reusable view"
-config["views"][matches[0]] = replacement
+view_index = [index for index in range(len(config["views"])) if config["views"][index]["path"] == target_path]
+assert len(view_index) == 1, "expected one reusable index"
+config["views"][view_index[0]] = replacement
 ```
 
 ### Stage 8: replace only the `living-areas` Lower Level slice
 
-This transform matches the committed scoped `living-areas` baseline: its top-level `cards` list has exactly three grids, whose leading title cards are `Main Level`, `Lower Level`, and `Upper Level ` (including its retained trailing space). It deep-copies and equality-checks the Main and Upper grids, then replaces only top-level card 1 with the complete literal Lower Level grid.
+This transform matches the committed scoped `living-areas` baseline: its top-level `cards` list has exactly three grids, whose leading title cards are `Main Level`, `Lower Level`, and `Upper Level ` (including its retained trailing space). It binds and equality-checks the untouched Main and Upper grids, then replaces only top-level card 1 with the complete literal Lower Level grid.
 
 ```python
-from copy import deepcopy
-
 target_path = "living-areas"
-matches = [index for index, view in enumerate(config["views"]) if view.get("path") == target_path]
+matches = [view for view in config["views"] if view["path"] == target_path]
 assert len(matches) == 1, "expected one living-areas view"
-view = config["views"][matches[0]]
-assert view.get("title") == "Areas" and view.get("subview") is True
-assert isinstance(view.get("cards"), list) and len(view["cards"]) == 3
-main_before, lower_before, upper_before = (deepcopy(view["cards"][0]), deepcopy(view["cards"][1]), deepcopy(view["cards"][2]))
-for expected_title, section in (("Main Level", main_before), ("Lower Level", lower_before), ("Upper Level ", upper_before)):
-    assert section.get("type") == "grid" and section.get("columns") == 1 and section.get("square") is False
-    assert isinstance(section.get("cards"), list) and section["cards"]
-    assert section["cards"][0] == {"type": "custom:mushroom-title-card", "title": expected_title}
+view = matches[0]
+assert view["title"] == "Areas" and view["subview"] == True
+assert len(view["cards"]) == 3
+main_before = view["cards"][0]
+lower_before = view["cards"][1]
+upper_before = view["cards"][2]
+assert main_before["type"] == "grid" and main_before["columns"] == 1 and main_before["square"] == False
+assert lower_before["type"] == "grid" and lower_before["columns"] == 1 and lower_before["square"] == False
+assert upper_before["type"] == "grid" and upper_before["columns"] == 1 and upper_before["square"] == False
+assert len(main_before["cards"]) > 0
+assert len(lower_before["cards"]) > 0
+assert len(upper_before["cards"]) > 0
+assert main_before["cards"][0] == {"type": "custom:mushroom-title-card", "title": "Main Level"}
+assert lower_before["cards"][0] == {"type": "custom:mushroom-title-card", "title": "Lower Level"}
+assert upper_before["cards"][0] == {"type": "custom:mushroom-title-card", "title": "Upper Level "}
 replacement = {"square":False,"columns":1,"type":"grid","cards":[
   {"type":"custom:mushroom-title-card","title":"Lower Level"},
   {"type":"horizontal-stack","cards":[
@@ -405,7 +410,7 @@ replacement = {"square":False,"columns":1,"type":"grid","cards":[
   ]},
   {"type":"custom:stack-in-card","cards":[{"type":"custom:mushroom-template-card","primary":"Home-Assistant","secondary":"{{ states('sensor.backup_backup_manager_state') if states('sensor.backup_backup_manager_state') not in ['unknown', 'unavailable'] else 'Backup status unavailable' }}","icon":"mdi:home-assistant","entity":"sensor.backup_backup_manager_state","tap_action":{"action":"navigate","navigation_path":"home-assistant"},"icon_color":"{{ 'red' if states(entity) in ['unknown', 'unavailable'] else 'blue' }}","fill_container":True,"layout":"horizontal"},{"type":"custom:mushroom-chips-card","alignment":"end","chips":[{"type":"template","entity":"binary_sensor.home_assistant_google_drive_backup_running","icon":"mdi:backup-restore","icon_color":"{{ 'red' if states(entity) in ['unknown', 'unavailable'] else 'green' }}","content":"{{ states(entity) }}","tap_action":{"action":"more-info"}},{"type":"template","entity":"update.home_assistant_core_update","icon":"mdi:update","icon_color":"{{ 'red' if states(entity) in ['on', 'unknown', 'unavailable'] else 'green' }}","content":"{{ states(entity) }}","tap_action":{"action":"more-info"}}]}]}
 ]}
-assert replacement["square"] is False and replacement["columns"] == 1 and replacement["type"] == "grid"
+assert replacement["square"] == False and replacement["columns"] == 1 and replacement["type"] == "grid"
 assert len(replacement["cards"]) == 5 and replacement["cards"][0] == {"type": "custom:mushroom-title-card", "title": "Lower Level"}
 view["cards"][1] = replacement
 assert view["cards"][0] == main_before and view["cards"][2] == upper_before
