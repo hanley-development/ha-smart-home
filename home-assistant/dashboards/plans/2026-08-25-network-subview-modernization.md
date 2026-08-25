@@ -1,6 +1,6 @@
 # Network Subview Modernization Proposal
 
-**Status:** Applied and verified
+**Status:** Applied and verified; seamless chip styling approved and pending
 
 **Date:** 2026-08-25
 
@@ -228,3 +228,58 @@ After a separately approved live write:
   uses a fragile numeric render index; this warning existed before the write
 - Rollback source: the literal `expected_current` object above remains usable
   through a separately approved guarded write
+
+## Seamless metric-chip styling amendment
+
+The approved presentation-only amendment copies the established Main Level
+chip treatment onto the 13 Network device metric rows. It removes the
+individual chip background and shadow, uses the compact 30-pixel chip height,
+and changes alignment from `start` to `justify` so available width is shared
+evenly. Entity IDs, templates, colors, card order, and More Info actions remain
+unchanged.
+
+Verified pre-write state:
+
+- Fresh dashboard hash: `bff59e65d79e65ac`
+- Target: `default/network`, view index 30
+- Exactly 13 `custom:mushroom-chips-card` metric rows
+- All 13 use `alignment: start` and have no `card_mod`
+- Metric counts: one row with seven chips, eight rows with four chips, and four
+  rows with five chips
+- The only configured action value remains `more-info`
+
+Exact proposed write body:
+
+```json
+{
+  "url_path": "default",
+  "config_hash": "bff59e65d79e65ac",
+  "python_transform": "<the literal Python transform below>",
+  "return_screenshot": false
+}
+```
+
+```python
+target_path = "network"
+matches = [view for view in config["views"] if view.get("path") == target_path]
+if len(matches) == 1:
+    target = matches[0]
+    cards = target.get("cards", [])
+    groups = [cards[index] for index in [3, 5, 7, 9]] if len(cards) == 12 else []
+    stacks = [card for group in groups for card in group.get("cards", [])] if len(groups) == 4 else []
+    metric_rows = [stack.get("cards", [])[1] for stack in stacks if stack.get("type") == "custom:stack-in-card" and len(stack.get("cards", [])) == 2 and stack.get("cards", [])[1].get("type") == "custom:mushroom-chips-card"]
+    expected_counts = [7, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 4]
+    safe = len(metric_rows) == 13 and [len(row.get("chips", [])) for row in metric_rows] == expected_counts and all(row.get("alignment") == "start" and row.get("card_mod") == None for row in metric_rows)
+    if safe:
+        for row in metric_rows:
+            row["alignment"] = "justify"
+            row["card_mod"] = {"style":"ha-card {\n  --chip-box-shadow: none;\n  --chip-background: none;\n  --chip-spacing: 0;\n  --chip-height: 30px;\n}\n"}
+```
+
+Expected read-back:
+
+- The Network view remains at the same title, path, and card structure.
+- All 13 metric rows use `alignment: justify`.
+- All 13 metric rows have the exact Main Level-derived `card_mod` variables.
+- Every entity, template, color, chip count, and action remains unchanged.
+- No state-changing or navigation action is introduced.
