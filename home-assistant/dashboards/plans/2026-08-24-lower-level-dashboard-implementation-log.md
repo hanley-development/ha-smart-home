@@ -39,12 +39,12 @@
 
 ### 3. Network
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 3 write body was shown; exact plan read-back covered by the same approval.
+- Pre-write hash: `f157acf8a2b3f9fb`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `2dc55cceffc20d84`.
+- Read-back and invariant result: path `network` at view index 29; title `Network`; `subview: true`; four top-level cards; exact selected entities verified: `binary_sensor.unifi_dream_machine_wan_status`, `sensor.unifi_dream_machine_wan_status`, `sensor.usw_aggregation_clients`, `sensor.us_8_poe_150w_clients`, `sensor.usw_aggregation_uptime`, and `sensor.us_8_poe_150w_uptime`; only `more-info` actions present; no gateway, switch, access point, PoE, reboot, power, service, automation, or script action present.
+- Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 4. Home-Assistant
 
