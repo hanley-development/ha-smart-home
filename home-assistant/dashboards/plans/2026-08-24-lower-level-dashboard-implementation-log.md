@@ -4,8 +4,11 @@
 
 - Approved design: `docs/superpowers/specs/2026-08-24-lower-level-dashboard-design.md`.
 - Proposal: `home-assistant/dashboards/plans/2026-08-24-lower-level-dashboard-proposal.md`.
-- Proposal commit: not started.
-- Push approval and result: not started.
+- Baseline commit: `98a1a21` (`Document Lower Level dashboard baseline`).
+- Initial proposal commit: `8accef7` (`Propose Lower Level dashboard modernization`).
+- Proposal compatibility and safety amendments: `b01e343` (import-free transform compatibility), `cddbd86` (conditional guards replacing assertions), and `7dcf1db` (path-safe scans for views without `path`).
+- Current pushed receipt head: `8b62bd0` (`Record Basement Entertainment dashboard rollout`).
+- Push approval and result: the reviewed baseline, proposal, and amendments were pushed to `origin/feature/lower-level-dashboard` through `8b62bd0`; local `HEAD` and `origin/feature/lower-level-dashboard` currently resolve to that same commit.
 
 ## Baseline Identity
 
@@ -27,12 +30,12 @@
 
 ### 2. Basement Bathroom
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: explicit approval for the exact Stage 2 write and direct read-back.
+- Pre-write hash: `b763e00eb2eea1e3`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `f157acf8a2b3f9fb`.
+- Read-back and invariant result: path `basement-bathroom` at view index 28; title `Basement Bathroom`; `subview: true`; four top-level cards; exact selected entities verified: `light.basement_bathroom_light`, `light.basement_shower_light`, `fan.basement_bathroom_fan`, `sensor.basement_bathroom_airguard_th_humidity`, `sensor.basement_bathroom_airguard_th_temperature`, and `sensor.basement_bathroom_fan_humidity`; no actions present.
+- Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 3. Network
 
