@@ -18,12 +18,12 @@
 
 ### 1. Basement Entertainment
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: explicit approval for the exact Stage 1 write and direct read-back.
+- Pre-write hash: `8bd951df2315db64`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write hash `b763e00eb2eea1e3`.
+- Read-back and invariant result: path `basement-entertainment` at view index 27; title `Basement Entertainment`; `subview: true`; four top-level cards; exact selected entities verified: `light.basement_main_light`, `light.basement_bar_light`, `fan.basement_living_room_fan`, `fan.basement_core_400`, `sensor.basement_ecobee_sensor_temperature`, `media_player.basement_receiver`, `media_player.basement_firetv`, and `media_player.samsung_qn90ca_85`; no actions present.
+- Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 2. Basement Bathroom
 
@@ -102,5 +102,5 @@
 - Remediation: the proposal now uses import-free transforms restricted to the tool's documented safe operations. Any retry still requires a new exact approval packet, fresh read, fresh hash, and read-back.
 - A second rejected no-change Stage 1 attempt found that the dashboard schema also forbids Python `assert` nodes. No mutation occurred and Stage 1 remains not started. The proposal now expresses every guard as an explicit conditional no-op; immediate read-back must treat a no-op as failure and stop the rollout.
 - A third rejected no-change Stage 1 attempt found that unrelated dashboard views can omit `path`; the path scan raised `KeyError` before mutation. No target was created and Stage 1 remains not started. Every unrelated-view path scan now uses `view.get("path")`; a fresh approved read and write packet remain required before any retry.
-- Rollback status: no live change has been made.
+- Historical rejected attempts above made no live change. Stage 1 is now complete and verified; rollback is not required.
 - Known limitation: the pre-change artifact provides scoped restore objects for the four existing paths and absence receipts for four new paths; it is not a whole-dashboard restore payload.
