@@ -25,7 +25,9 @@
 - Approval reference: explicit approval for the exact Stage 1 write and direct read-back.
 - Pre-write hash: `8bd951df2315db64`.
 - Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write hash `b763e00eb2eea1e3`.
-- Read-back and invariant result: path `basement-entertainment` at view index 27; title `Basement Entertainment`; `subview: true`; four top-level cards; exact selected entities verified: `light.basement_main_light`, `light.basement_bar_light`, `fan.basement_living_room_fan`, `fan.basement_core_400`, `sensor.basement_ecobee_sensor_temperature`, `media_player.basement_receiver`, `media_player.basement_firetv`, and `media_player.samsung_qn90ca_85`; no actions present.
+- Read-back and invariant result: path `basement-entertainment` at view index 27; title `Basement Entertainment`; `subview: true`; four top-level cards.
+  Exact selected entities verified: `light.basement_main_light`, `light.basement_bar_light`, `fan.basement_living_room_fan`, `fan.basement_core_400`,
+  `sensor.basement_ecobee_sensor_temperature`, `media_player.basement_receiver`, `media_player.basement_firetv`, and `media_player.samsung_qn90ca_85`; no actions present.
 - Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 2. Basement Bathroom
@@ -34,7 +36,9 @@
 - Approval reference: explicit approval for the exact Stage 2 write and direct read-back.
 - Pre-write hash: `b763e00eb2eea1e3`.
 - Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `f157acf8a2b3f9fb`.
-- Read-back and invariant result: path `basement-bathroom` at view index 28; title `Basement Bathroom`; `subview: true`; four top-level cards; exact selected entities verified: `light.basement_bathroom_light`, `light.basement_shower_light`, `fan.basement_bathroom_fan`, `sensor.basement_bathroom_airguard_th_humidity`, `sensor.basement_bathroom_airguard_th_temperature`, and `sensor.basement_bathroom_fan_humidity`; no actions present.
+- Read-back and invariant result: path `basement-bathroom` at view index 28; title `Basement Bathroom`; `subview: true`; four top-level cards.
+  Exact selected entities verified: `light.basement_bathroom_light`, `light.basement_shower_light`, `fan.basement_bathroom_fan`,
+  `sensor.basement_bathroom_airguard_th_humidity`, `sensor.basement_bathroom_airguard_th_temperature`, and `sensor.basement_bathroom_fan_humidity`; no actions present.
 - Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 3. Network
@@ -43,17 +47,23 @@
 - Approval reference: standing plan approval applied after the exact Stage 3 write body was shown; exact plan read-back covered by the same approval.
 - Pre-write hash: `f157acf8a2b3f9fb`.
 - Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `2dc55cceffc20d84`.
-- Read-back and invariant result: path `network` at view index 29; title `Network`; `subview: true`; four top-level cards; exact selected entities verified: `binary_sensor.unifi_dream_machine_wan_status`, `sensor.unifi_dream_machine_wan_status`, `sensor.usw_aggregation_clients`, `sensor.us_8_poe_150w_clients`, `sensor.usw_aggregation_uptime`, and `sensor.us_8_poe_150w_uptime`; only `more-info` actions present; no gateway, switch, access point, PoE, reboot, power, service, automation, or script action present.
+- Read-back and invariant result: path `network` at view index 29; title `Network`; `subview: true`; four top-level cards.
+  Exact selected entities verified: `binary_sensor.unifi_dream_machine_wan_status`, `sensor.unifi_dream_machine_wan_status`, `sensor.usw_aggregation_clients`,
+  `sensor.us_8_poe_150w_clients`, `sensor.usw_aggregation_uptime`, and `sensor.us_8_poe_150w_uptime`; only `more-info` actions present.
+  No gateway, switch, access point, PoE, reboot, power, service, automation, or script action present.
 - Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 4. Home-Assistant
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 4 write body was shown; exact plan read-back covered by the same approval.
+- Pre-write hash: `2dc55cceffc20d84`.
+- Operation body/result: write completed; post-write/read-back hash `1bf172960a160164`.
+- Read-back and invariant result: path `home-assistant` at view index 30; title `Home-Assistant`; `subview: true`; four top-level cards.
+  Exact selected entities verified: `sensor.backup_backup_manager_state`, `binary_sensor.home_assistant_google_drive_backup_running`, `update.home_assistant_core_update`,
+  `update.home_assistant_operating_system_update`, `sensor.backup_last_successful_automatic_backup`, and `sensor.backup_next_scheduled_automatic_backup`.
+  Only `more-info` actions present; no restart, shutdown, reload, update-install, backup, restore, service, automation, script, or administrative action present.
+- Rollback status: required no; the pre-change path-absence receipt remains available for a separately approved targeted removal if needed.
 
 ### 5. Mike's Office
 
@@ -101,9 +111,13 @@
 
 ## Deviations and Rollback Status
 
-- 2026-08-24 attempted Stage 1 write: the dashboard tool rejected the submitted Python transform at schema security validation because it contained an import. No dashboard mutation occurred, no target view was created, and the subsequent live verification found the dashboard unchanged. Stage 1 remains not started; this is a failed preflight/write attempt, not a rollout receipt.
+- 2026-08-24 attempted Stage 1 write: the dashboard tool rejected the submitted Python transform at schema security validation because it contained an import.
+  No dashboard mutation occurred, no target view was created, and the subsequent live verification found the dashboard unchanged.
+  Stage 1 remains not started; this is a failed preflight/write attempt, not a rollout receipt.
 - Remediation: the proposal now uses import-free transforms restricted to the tool's documented safe operations. Any retry still requires a new exact approval packet, fresh read, fresh hash, and read-back.
-- A second rejected no-change Stage 1 attempt found that the dashboard schema also forbids Python `assert` nodes. No mutation occurred and Stage 1 remains not started. The proposal now expresses every guard as an explicit conditional no-op; immediate read-back must treat a no-op as failure and stop the rollout.
-- A third rejected no-change Stage 1 attempt found that unrelated dashboard views can omit `path`; the path scan raised `KeyError` before mutation. No target was created and Stage 1 remains not started. Every unrelated-view path scan now uses `view.get("path")`; a fresh approved read and write packet remain required before any retry.
+- A second rejected no-change Stage 1 attempt found that the dashboard schema also forbids Python `assert` nodes. No mutation occurred and Stage 1 remains not started.
+  The proposal now expresses every guard as an explicit conditional no-op; immediate read-back must treat a no-op as failure and stop the rollout.
+- A third rejected no-change Stage 1 attempt found that unrelated dashboard views can omit `path`; the path scan raised `KeyError` before mutation.
+  No target was created and Stage 1 remains not started. Every unrelated-view path scan now uses `view.get("path")`; a fresh approved read and write packet remain required before any retry.
 - Historical rejected attempts above made no live change. Stage 1 is now complete and verified; rollback is not required.
 - Known limitation: the pre-change artifact provides scoped restore objects for the four existing paths and absence receipts for four new paths; it is not a whole-dashboard restore payload.
