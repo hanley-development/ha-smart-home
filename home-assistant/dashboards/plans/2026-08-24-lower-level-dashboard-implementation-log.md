@@ -106,12 +106,17 @@
 
 ### 8. Areas Lower Level replacement
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 8 pre-read set, guarded write body, complete literal replacement, and read-back body were shown.
+- Pre-write hash: `5c0bf025490d2ef0`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `d77b8d126527c032`.
+- Baseline comparison: `living-areas` remained at index 2 with title `Areas`, path `living-areas`, `subview: true`, and three top-level grids.
+  Main Level remained a one-column nonsquare grid with nine cards; Upper Level remained a one-column nonsquare grid with six cards and its original heading, including its retained trailing space.
+  Only the former three-card Lower Level grid was replaced by the approved five-card directory grid.
+- Read-back and invariant result: seven destinations appear in the approved order across three paired rows and one full-width final row.
+  All seven main cards navigate to the exact destination paths; all fourteen chips use `more-info`; every destination has exactly two chips;
+  no hold, double-tap, toggle, service, power, restart, reload, shutdown, update-install, automation, or script action is present.
+- Rollback status: required no; the complete pre-change `living-areas` view object remains available in the scoped baseline snapshot.
 
 ## Final Verification
 
