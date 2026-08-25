@@ -93,12 +93,16 @@
 
 ### 7. Server Room
 
-- Status: not started.
-- Approval reference: not started.
-- Pre-write hash: not started.
-- Operation body/result: not started.
-- Read-back and invariant result: not started.
-- Rollback status: not started.
+- Status: complete and verified.
+- Approval reference: standing plan approval applied after the exact Stage 7 pre-read, write body, and read-back body were shown.
+- Pre-write hash: `2dccde3a160d0c76`.
+- Operation body/result: `write_success: true`; `write_committed: true`; `post_write_verified: true`; post-write/read-back hash `5c0bf025490d2ef0`.
+- Baseline comparison: the unique view remained at index 16 with title and path `Server Room` / `server-room`; `subview` changed from absent/false to `true`,
+  and the empty baseline was replaced by the approved four-card read-only equipment-health hierarchy.
+- Read-back and invariant result: exact selected entities verified: `sensor.server_rack_airguard_th_temperature`, `sensor.cyberpower_status`,
+  `sensor.cyberpower_battery_charge`, `sensor.cyberpower_load`, `sensor.mediastorage_temperature`, `sensor.r2d2_temperature`, and `sensor.tripp_lite_ups_status`.
+  All seven actions are `more-info`; no power, reboot, shutdown, service, automation, or script action is present.
+- Rollback status: required no; the complete pre-change empty `server-room` view object remains available in the scoped baseline snapshot.
 
 ### 8. Areas Lower Level replacement
 
